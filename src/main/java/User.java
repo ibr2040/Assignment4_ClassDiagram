@@ -6,7 +6,7 @@ abstract class User {
     private String login;
     private String password;
 
-    private User(
+     User(
             String fullName,
             String email,
             String mobileNumber,
