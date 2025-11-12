@@ -1,16 +1,18 @@
 public class Merchant extends User{
-    private String bankAccount;
+    private String bankAccountNumber;
     public Merchant(
             String fullName,
             String email,
             String mobileNumber,
-            String shippingAddress,
             String login,
             String password,
-            String bankAccount
+            String bankAccountNumber,
+            String street,
+            String city,
+            String state
     ){
-        super(fullName,email,mobileNumber,shippingAddress,login,password);
-        this.bankAccount = bankAccount;
+        super(fullName,email,mobileNumber,login,password,street,city,state);
+        this.bankAccountNumber = bankAccountNumber;
     }
     public void viewInventory(){
         System.out.println("Merchant view inventory");

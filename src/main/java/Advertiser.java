@@ -1,11 +1,15 @@
 public class Advertiser extends User{
-    Advertiser(            String fullName,
+    public Advertiser(     String fullName,
                            String email,
                            String mobileNumber,
-                           String shippingAddress,
                            String login,
-                           String password){
-        super(fullName, email, mobileNumber, shippingAddress, login, password);
+                           String password,
+                           String street,
+                           String city,
+                           String state
+    ){
+        super(fullName, email, mobileNumber, login, password,street,city,state);
+
     }
     public void addCampaign(){
         System.out.println("Advertiser: add campaign");
