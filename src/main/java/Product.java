@@ -8,20 +8,17 @@ public class Product implements Serializable {
     private String title;
     private String category;
     private String description;
-    private boolean availability;
-
+    private Boolean availability;
     private static double advertismentFee;
 
     private static final List<Product> extent=new ArrayList<>();
+    private static final String EXTENT_FILE="product_extent.ser";
 
     public static List<Product> getExtent() {
         return extent;
     }
 
-    private static final String EXTENT_FILE="product_extent.ser";
-
-
-    public Product(String image, double price, String title, String category, String description, boolean availability) {
+    public Product(String image, double price, String title, String category, String description, Boolean availability) {
 
         if (image==null || image.isBlank()){
             throw new IllegalArgumentException("Image cannot be empty");
@@ -93,7 +90,7 @@ public class Product implements Serializable {
         return description;
     }
 
-    public boolean isAvailability() {
+    public Boolean getAvailability() {
         return availability;
     }
 
