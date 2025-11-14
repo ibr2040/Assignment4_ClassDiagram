@@ -19,10 +19,10 @@ public class Transaction implements Serializable{
     private double value;
     private String currency;
     private LocalDate dateOfTransaction;
-    private Status status;
+
     private final StripeClient stripeClient;
 
-    public Transaction(String receiveBankInformation, String payerInformation, double value, String currency, LocalDate dateOfTransaction, Status status,StripeClient stripeClient) {
+    public Transaction(String receiveBankInformation, String payerInformation, double value, String currency, LocalDate dateOfTransaction,StripeClient stripeClient) {
         if (receiveBankInformation==null || receiveBankInformation.isBlank()){
             throw new IllegalArgumentException("Bank Information cannot be empty ");
         }
@@ -39,9 +39,7 @@ public class Transaction implements Serializable{
         if (dateOfTransaction==null || dateOfTransaction.isAfter(LocalDate.now())){
             throw new IllegalArgumentException("Date cannot be in the future ");
         }
-        if (status==null){
-            throw new IllegalArgumentException("Status cannot be null ");
-        }
+
         if (stripeClient == null) {
             throw new IllegalArgumentException("Stripe client cannot be null");
         }
@@ -51,7 +49,6 @@ public class Transaction implements Serializable{
         this.value = value;
         this.currency = currency;
         this.dateOfTransaction = dateOfTransaction;
-        this.status = status;
         this.stripeClient=stripeClient;
 
         extent.add(this);
@@ -95,8 +92,12 @@ public class Transaction implements Serializable{
     }
 
     public Status getStatus() {
-        if (value == 0) return Status.FAILED;
-        if (dateOfTransaction.isEqual(LocalDate.now())) return Status.WAITS;
+        if (value == 0) {
+            return Status.FAILED;
+        }
+        if (dateOfTransaction.isEqual(LocalDate.now())) {
+            return Status.WAITS;
+        }
         return Status.SUCCESSEFUL;
     }
 
