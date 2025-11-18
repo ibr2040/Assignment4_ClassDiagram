@@ -1,5 +1,7 @@
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class CartTest {
@@ -43,5 +45,19 @@ class CartTest {
         Cart cart=new Cart();
         assertThrows(IllegalArgumentException.class,()->cart.changeQuantity(-1));
     }
+
+    @Test
+    public void testCartExtentSaveLoad() throws IOException, ClassNotFoundException {
+        Cart.getExtent().clear();
+
+        Cart c1=new Cart();
+        Cart c2=new Cart();
+
+        Cart.saveExtent();
+        Cart.getExtent().clear();
+        Cart.loadExtent();
+        assertEquals(2,Cart.getExtent().size());
+    }
+
 
 }

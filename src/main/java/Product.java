@@ -32,6 +32,15 @@ public class Product implements Serializable {
         if (price<0){
             throw new IllegalArgumentException("Price cannot be negative");
         }
+
+        if(price==0){
+            throw new IllegalArgumentException("Price cannot be zero");
+        }
+
+        if (!image.endsWith(".png") && !image.endsWith(".jpg")){
+            throw new IllegalArgumentException("Image must be PNG or JPG");
+        }
+
         this.image = image;
         this.price = price;
         this.title = title;

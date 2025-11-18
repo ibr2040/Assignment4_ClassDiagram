@@ -14,6 +14,12 @@ public class StripeClient implements Serializable {
         if (clientId == null || clientId.isBlank()) {
             throw new IllegalArgumentException("Client ID cannot be empty");
         }
+
+        if (clientId.length()<5){
+            throw new IllegalArgumentException("Client ID too short");
+        }
+
+
         this.clientId = clientId;
         extent.add(this);
     }
