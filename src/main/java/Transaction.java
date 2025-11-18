@@ -44,6 +44,14 @@ public class Transaction implements Serializable{
             throw new IllegalArgumentException("Stripe client cannot be null");
         }
 
+        if (receiveBankInformation.length() < 5) {
+            throw new IllegalArgumentException("Bank information too short");
+        }
+
+        if (currency.length() != 3) {
+            throw new IllegalArgumentException("Currency must be ISO-3 format");
+        }
+
         this.receiveBankInformation = receiveBankInformation;
         this.payerInformation = payerInformation;
         this.value = value;
@@ -112,4 +120,10 @@ public class Transaction implements Serializable{
     public void receiveConfirmation(){
         System.out.println("Transaction processed successfully for client: " + stripeClient.getClientId());
     }
+
+    public static List<Transaction> getExtent() {
+        return extent;
+    }
+
+    
 }
