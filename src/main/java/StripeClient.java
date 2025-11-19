@@ -11,13 +11,21 @@ public class StripeClient implements Serializable {
     private String clientId;
 
     public StripeClient(String clientId) {
-        if (clientId == null || clientId.isBlank()) {
+        if (clientId == null || clientId.isBlank())
             throw new IllegalArgumentException("Client ID cannot be empty");
-        }
 
-        if (clientId.length()<5){
+        if (clientId.contains(" "))
+            throw new IllegalArgumentException("Client ID cannot contain spaces");
+
+        if (!clientId.matches("[A-Za-z0-9]+"))
+            throw new IllegalArgumentException("Client ID must be alphanumeric only");
+
+        if (clientId.length() < 5)
             throw new IllegalArgumentException("Client ID too short");
-        }
+
+        if (clientId.length() > 20)
+            throw new IllegalArgumentException("Client ID too long");
+
 
 
         this.clientId = clientId;
@@ -51,5 +59,9 @@ public class StripeClient implements Serializable {
 
     public String getClientId() {
         return clientId;
+    }
+
+    public static List<StripeClient> getExtent() {
+        return extent;
     }
 }
