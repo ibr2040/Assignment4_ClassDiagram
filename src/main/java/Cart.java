@@ -16,6 +16,7 @@ public class Cart implements Serializable {
     }
 
     public Cart() {
+
         extent.add(this);
     }
 
@@ -45,6 +46,12 @@ public class Cart implements Serializable {
         if (p==null){
             throw new IllegalArgumentException("Product cannot be null");
         }
+        if (p.getAvailability())
+            throw new IllegalArgumentException("Cannot add AVAILABLE product to unavailableProducts");
+
+        if (unavailableProducts.contains(p))
+            throw new IllegalArgumentException("Product already in cart");
+
         unavailableProducts.add(p);
     }
 
