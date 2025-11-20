@@ -5,12 +5,11 @@ public int TimeLeft(){
     return dateOfExpiration.getDays() - dateOfEstablishment.getDays();
 }
     public DurationDate(Date dateOfEstablishment, Date dateOfExpiration){
-    if(TimeLeft()>0) {
         this.dateOfEstablishment = dateOfEstablishment;
         this.dateOfExpiration = dateOfExpiration;
-    }else{throw new InvalidValueException("The duration date cannot be in the past");}
+        if(!(TimeLeft()>0)){throw new InvalidValueException("The duration exceeds the maximum number of days");}
     }
-    public class Date {
+    public static class Date {
         private int year;
         private int month;
         private int day;
