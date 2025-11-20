@@ -63,8 +63,6 @@ public class Transaction implements Serializable{
             throw new IllegalArgumentException("Date cannot be null");
         }
 
-
-
         if (dateOfTransaction.isAfter(LocalDate.now())) {
             throw new IllegalArgumentException("Date cannot be in the future");
         }
