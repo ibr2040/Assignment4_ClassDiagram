@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class UserTest {
 
-    // Utility — создаём анонимного наследника, потому что User — abstract
     private User createUser(
             String fullName,
             String email,
@@ -17,10 +16,6 @@ class UserTest {
     ) {
         return new User(fullName, email, mobileNumber, login, password, street, city, state) {};
     }
-
-    // ─────────────────────────────────────────────
-    //                FULL NAME TESTS
-    // ─────────────────────────────────────────────
 
     @Test
     public void testFullNameEmpty() {
@@ -55,9 +50,7 @@ class UserTest {
         );
     }
 
-    // ─────────────────────────────────────────────
-    //                EMAIL TESTS
-    // ─────────────────────────────────────────────
+
 
     @Test
     public void testEmailEmpty() {
@@ -91,9 +84,6 @@ class UserTest {
         );
     }
 
-    // ─────────────────────────────────────────────
-    //            MOBILE NUMBER TESTS
-    // ─────────────────────────────────────────────
 
     @Test
     public void testMobileNumberEmpty() {
@@ -127,9 +117,6 @@ class UserTest {
         );
     }
 
-    // ─────────────────────────────────────────────
-    //              LOGIN + PASSWORD TESTS
-    // ─────────────────────────────────────────────
 
     @Test
     public void testLoginEmpty() {
@@ -163,9 +150,6 @@ class UserTest {
         );
     }
 
-    // ─────────────────────────────────────────────
-    //           SHIPPING ADDRESS TESTS
-    // ─────────────────────────────────────────────
 
     @Test
     public void testStreetEmpty() {
@@ -215,9 +199,6 @@ class UserTest {
         );
     }
 
-    // ─────────────────────────────────────────────
-    //                updateProfile TEST
-    // ─────────────────────────────────────────────
 
     @Test
     public void testUpdateProfileNullAddress() {
@@ -244,9 +225,6 @@ class UserTest {
         );
     }
 
-    // ─────────────────────────────────────────────
-    //                  EXTENT TEST
-    // ─────────────────────────────────────────────
 
     @Test
     public void testUserExtentSaveLoad() throws Exception {
@@ -296,19 +274,17 @@ class UserTest {
     }
     @Test
     public void testMerchantBankAccountExceptions() {
-        // пустой
         assertThrows(EmptyFieldException.class, () ->
                 new Merchant("Alice", "a@a.com", "+123456789", "login", "password123",
                         "", "Street", "City", "State")
         );
 
-        // слишком короткий
+
         assertThrows(InvalidFormatException.class, () ->
                 new Merchant("Alice", "a@a.com", "+123456789", "login", "password123",
                         "12345", "Street", "City", "State")
         );
 
-        // содержит буквы
         assertThrows(InvalidFormatException.class, () ->
                 new Merchant("Alice", "a@a.com", "+123456789", "login", "password123",
                         "12AB345678", "Street", "City", "State")
