@@ -266,19 +266,18 @@ class UserTest {
   
     @Test
     public void testMerchantBankAccountExceptions() {
-        // пустой
+
         assertThrows(EmptyFieldException.class, () ->
                 new Merchant("Alice", "a@a.com", "+123456789", "login", "password123",
                         "", "Street", "City", "State")
         );
 
-        // слишком короткий
+
         assertThrows(InvalidFormatException.class, () ->
                 new Merchant("Alice", "a@a.com", "+123456789", "login", "password123",
                         "12345", "Street", "City", "State")
         );
 
-        // содержит буквы
         assertThrows(InvalidFormatException.class, () ->
                 new Merchant("Alice", "a@a.com", "+123456789", "login", "password123",
                         "12AB345678", "Street", "City", "State")
