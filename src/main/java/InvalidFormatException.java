@@ -3,4 +3,3 @@ public class InvalidFormatException extends RuntimeException {
         super(message);
     }
 }
-
