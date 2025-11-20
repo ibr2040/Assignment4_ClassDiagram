@@ -3,7 +3,6 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class UserTest {
-
     private User createUser(
             String fullName,
             String email,
@@ -50,8 +49,6 @@ class UserTest {
         );
     }
 
-
-
     @Test
     public void testEmailEmpty() {
         assertThrows(IllegalArgumentException.class, () ->
@@ -83,8 +80,6 @@ class UserTest {
                 )
         );
     }
-
-
     @Test
     public void testMobileNumberEmpty() {
         assertThrows(IllegalArgumentException.class, () ->
@@ -117,7 +112,6 @@ class UserTest {
         );
     }
 
-
     @Test
     public void testLoginEmpty() {
         assertThrows(IllegalArgumentException.class, () ->
@@ -149,7 +143,6 @@ class UserTest {
                 )
         );
     }
-
 
     @Test
     public void testStreetEmpty() {
@@ -199,7 +192,6 @@ class UserTest {
         );
     }
 
-
     @Test
     public void testUpdateProfileNullAddress() {
         User u = createUser(
@@ -224,7 +216,6 @@ class UserTest {
                 )
         );
     }
-
 
     @Test
     public void testUserExtentSaveLoad() throws Exception {
@@ -274,17 +265,19 @@ class UserTest {
     }
     @Test
     public void testMerchantBankAccountExceptions() {
+        // пустой
         assertThrows(EmptyFieldException.class, () ->
                 new Merchant("Alice", "a@a.com", "+123456789", "login", "password123",
                         "", "Street", "City", "State")
         );
 
-
+        // слишком короткий
         assertThrows(InvalidFormatException.class, () ->
                 new Merchant("Alice", "a@a.com", "+123456789", "login", "password123",
                         "12345", "Street", "City", "State")
         );
 
+        // содержит буквы
         assertThrows(InvalidFormatException.class, () ->
                 new Merchant("Alice", "a@a.com", "+123456789", "login", "password123",
                         "12AB345678", "Street", "City", "State")
@@ -304,5 +297,4 @@ class UserTest {
                 "Street", "City", "State");
         assertNotNull(a);
     }
-
 }
