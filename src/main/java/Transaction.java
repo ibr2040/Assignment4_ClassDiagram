@@ -23,44 +23,59 @@ public class Transaction implements Serializable{
     private final StripeClient stripeClient;
 
     public Transaction(String receiveBankInformation, String payerInformation, double value, String currency, LocalDate dateOfTransaction,StripeClient stripeClient) {
-        if (receiveBankInformation == null || receiveBankInformation.isBlank())
+        if (receiveBankInformation == null || receiveBankInformation.isBlank()) {
             throw new IllegalArgumentException("Bank Information cannot be empty");
+        }
 
-        if (!receiveBankInformation.matches("[A-Z0-9]{5,34}"))
+        if (!receiveBankInformation.matches("[A-Z0-9]{5,34}")) {
             throw new IllegalArgumentException("Bank information must be valid IBAN-like format");
+        }
 
-        if (payerInformation == null || payerInformation.isBlank())
+        if (payerInformation == null || payerInformation.isBlank()) {
             throw new IllegalArgumentException("Payer Information cannot be empty");
+        }
 
-        if (payerInformation.matches(".*\\d.*"))
+        if (payerInformation.matches(".*\\d.*")) {
             throw new IllegalArgumentException("Payer Information cannot contain digits");
+        }
 
-        if (value < 0)
+        if (value < 0) {
             throw new IllegalArgumentException("Value cannot be negative");
+        }
 
-        if (value == 0)
+        if (value == 0) {
             throw new IllegalArgumentException("Value cannot be zero");
+        }
 
-        if (value > 1_000_000)
+        if (value > 1_000_000) {
             throw new IllegalArgumentException("Value exceeds transfer limit");
+        }
 
-        if (currency == null || currency.isBlank())
+        if (currency == null || currency.isBlank()) {
             throw new IllegalArgumentException("Currency cannot be empty");
+        }
 
-        if (!currency.matches("[A-Z]{3}"))
+        if (!currency.matches("[A-Z]{3}")) {
             throw new IllegalArgumentException("Currency must be ISO-3 format (e.g., USD)");
+        }
 
-        if (dateOfTransaction == null)
+        if (dateOfTransaction == null) {
             throw new IllegalArgumentException("Date cannot be null");
+        }
 
-        if (dateOfTransaction.isAfter(LocalDate.now()))
+
+
+        if (dateOfTransaction.isAfter(LocalDate.now())) {
             throw new IllegalArgumentException("Date cannot be in the future");
+        }
 
-        if (dateOfTransaction.isBefore(LocalDate.now().minusYears(10)))
+        if (dateOfTransaction.isBefore(LocalDate.now().minusYears(10))) {
             throw new IllegalArgumentException("Date cannot be older than 10 years");
+        }
 
-        if (stripeClient == null)
+        if (stripeClient == null) {
             throw new IllegalArgumentException("Stripe client cannot be null");
+        }
 
         this.receiveBankInformation = receiveBankInformation;
         this.payerInformation = payerInformation;
