@@ -92,6 +92,89 @@ class ProductTest {
     }
 
     @Test
+    public void testTitleMustBeAtLeast3Chars() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            new Product(
+                    "/images/x.png",
+                    50,
+                    "AB",   // too short
+                    "Electronics",
+                    "desc",
+                    true
+            );
+        });
+    }
+
+    @Test
+    public void testPriceCannotBeZero() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            new Product(
+                    "/images/x.png",
+                    0,
+                    "Phone",
+                    "Electronics",
+                    "desc",
+                    true
+            );
+        });
+    }
+
+    @Test
+    public void testPriceCannotExceedMaximum() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            new Product(
+                    "/images/x.png",
+                    200000,
+                    "Phone",
+                    "Electronics",
+                    "desc",
+                    true
+            );
+        });
+    }
+    @Test
+    public void testImageCannotBeEmpty() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            new Product(
+                    "",
+                    10,
+                    "Phone",
+                    "Electronics",
+                    "desc",
+                    true
+            );
+        });
+    }
+
+    @Test
+    public void testDescriptionTooLong() {
+        String longDesc = "a".repeat(301);
+        assertThrows(IllegalArgumentException.class, () -> {
+            new Product(
+                    "/images/x.png",
+                    50,
+                    "Phone",
+                    "Electronics",
+                    longDesc,
+                    true
+            );
+        });
+    }
+    @Test
+    public void testAvailabilityCannotBeNull() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            new Product(
+                    "/images/x.png",
+                    50,
+                    "Phone",
+                    "Electronics",
+                    "desc",
+                    null
+            );
+        });
+    }
+
+    @Test
     public void testProductExtentSaveLoad() throws Exception {
         Product.getExtent().clear();
 

@@ -23,38 +23,49 @@ public class Product implements Serializable {
 
     public Product(String image, double price, String title, String category, String description, Boolean availability) {
 
-        if (image == null || image.isBlank())
+        if (image == null || image.isBlank()) {
             throw new IllegalArgumentException("Image cannot be empty");
+        }
 
-        if (!image.matches("/images/[A-Za-z0-9_]+\\.(png|jpg)"))
+        if (!image.matches("/images/[A-Za-z0-9_]+\\.(png|jpg)")) {
             throw new IllegalArgumentException("Image must be in /images/... path and PNG/JPG");
+        }
 
-        if (title == null || title.isBlank())
+        if (title == null || title.isBlank()) {
             throw new IllegalArgumentException("Title cannot be empty");
+        }
 
-        if (title.length() < 3)
+        if (title.length() < 3) {
             throw new IllegalArgumentException("Title must have at least 3 characters");
+        }
 
-        if (category == null || category.isBlank())
+        if (category == null || category.isBlank()) {
             throw new IllegalArgumentException("Category cannot be empty");
+        }
 
-        if (!allowedCategories.contains(category))
+        if (!allowedCategories.contains(category)) {
             throw new IllegalArgumentException("Category not allowed: " + category);
+        }
 
-        if (price < 0)
+        if (price < 0) {
             throw new IllegalArgumentException("Price cannot be negative");
+        }
 
-        if (price == 0)
+        if (price == 0) {
             throw new IllegalArgumentException("Price cannot be zero");
+        }
 
-        if (price > 100_000)
+        if (price > 100_000) {
             throw new IllegalArgumentException("Price exceeds allowed maximum");
+        }
 
-        if (description != null && description.length() > 300)
+        if (description != null && description.length() > 300) {
             throw new IllegalArgumentException("Description too long (max 300 chars)");
+        }
 
-        if (availability == null)
+        if (availability == null) {
             throw new IllegalArgumentException("Availability cannot be null");
+        }
 
 
         this.image = image;
