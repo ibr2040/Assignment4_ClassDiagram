@@ -263,6 +263,7 @@ class UserTest {
         assertNotSame(a, list.get(0));
         assertNotSame(m, list.get(1));
     }
+  
     @Test
     public void testMerchantBankAccountExceptions() {
         // пустой
