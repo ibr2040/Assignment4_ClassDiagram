@@ -59,6 +59,7 @@ abstract class User implements Serializable{
         this.shippingAddress = new ShippingAddress(street, city, state);
 
         extent.add(this);
+        ExtentClass.register(this);
     }
 
     public boolean updateProfile(
@@ -131,5 +132,29 @@ abstract class User implements Serializable{
         public String toString() {
             return street + " " + city + " " + state;
         }
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getMobileNumber() {
+        return mobileNumber;
+    }
+
+    public ShippingAddress getShippingAddress() {
+        return shippingAddress;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public String getPassword() {
+        return password;
     }
 }

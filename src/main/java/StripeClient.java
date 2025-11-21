@@ -40,6 +40,7 @@ public class StripeClient implements Serializable {
 
         this.clientId = clientId;
         extent.add(this);
+        ExtentClass.register(this);
     }
 
     public static void saveExtent() throws Exception {
