@@ -59,7 +59,6 @@ abstract class User implements Serializable{
         this.shippingAddress = new ShippingAddress(street, city, state);
 
         extent.add(this);
-        ExtentClass.register(this);
     }
 
     public boolean updateProfile(

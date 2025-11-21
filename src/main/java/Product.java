@@ -76,7 +76,6 @@ public class Product implements Serializable {
         this.availability = availability;
 
         extent.add(this );
-        ExtentClass.register(this);
     }
 
     public static void setAdvertismentFee(double fee){
