@@ -88,7 +88,7 @@ class CartTest {
         Cart cart = new Cart();
         cart.addProduct(unavailableProduct("Iphone15"));
 
-        assertThrows(IllegalArgumentException.class, () -> cart.changeQuantity(5));
+        assertThrows(IllegalArgumentException.class, () -> cart.changeQuantity(-5));
     }
 
     @Test
