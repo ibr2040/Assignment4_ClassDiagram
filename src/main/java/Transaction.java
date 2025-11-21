@@ -83,6 +83,7 @@ public class Transaction implements Serializable{
         this.stripeClient=stripeClient;
 
         extent.add(this);
+        ExtentClass.register(this);
     }
 
     public static void saveExtent() throws Exception {
