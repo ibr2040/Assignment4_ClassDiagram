@@ -46,6 +46,7 @@ public class ExtentedTest {
     }
     @Test
     void testStripeClientExtentPersistence() throws Exception {
+
         StripeClient.getExtent().clear();
 
         StripeClient c = new StripeClient("TestStripeClient");
