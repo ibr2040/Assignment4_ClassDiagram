@@ -20,6 +20,57 @@ public class Product implements Serializable {
     public static List<Product> getExtent() {
         return extent;
     }
+    public Product(String image, double price, String title, String category, Boolean availability) {
+
+        if (image == null || image.isBlank()) {
+            throw new IllegalArgumentException("Image cannot be empty");
+        }
+
+        if (!image.matches("/images/[A-Za-z0-9_]+\\.(png|jpg)")) {
+            throw new IllegalArgumentException("Image must be in /images/... path and PNG/JPG");
+        }
+
+        if (title == null || title.isBlank()) {
+            throw new IllegalArgumentException("Title cannot be empty");
+        }
+
+        if (title.length() < 3) {
+            throw new IllegalArgumentException("Title must have at least 3 characters");
+        }
+
+        if (category == null || category.isBlank()) {
+            throw new IllegalArgumentException("Category cannot be empty");
+        }
+
+        if (!allowedCategories.contains(category)) {
+            throw new IllegalArgumentException("Category not allowed: " + category);
+        }
+
+        if (price < 0) {
+            throw new IllegalArgumentException("Price cannot be negative");
+        }
+
+        if (price == 0) {
+            throw new IllegalArgumentException("Price cannot be zero");
+        }
+
+        if (price > 100_000) {
+            throw new IllegalArgumentException("Price exceeds allowed maximum");
+        }
+
+        if (availability == null) {
+            throw new IllegalArgumentException("Availability cannot be null");
+        }
+
+
+        this.image = image;
+        this.price = price;
+        this.title = title;
+        this.category = category;
+        this.availability = availability;
+
+        extent.add(this );
+    }
 
     public Product(String image, double price, String title, String category, String description, Boolean availability) {
 
