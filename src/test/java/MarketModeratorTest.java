@@ -37,7 +37,7 @@ class MarketModeratorTest {
 
         Merchant m2 = new Merchant(
                 "K", "aaa@bbb.com", "+234535422", "l2", "password111",
-                "DE44500105175407324931",
+                "PL44500105175407324931",
                 "xx", "yy", "zz"
         );
 
