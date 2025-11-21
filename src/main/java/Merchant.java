@@ -19,9 +19,7 @@ public class Merchant extends User {
             throw new EmptyFieldException("Bank account number cannot be empty");
         }
 
-        if (!bankAccountNumber.matches("\\d{10,20}")) {
-            throw new InvalidFormatException("Bank account number must contain 10–20 digits, and no letters");
-        }
+
 
         this.bankAccountNumber = bankAccountNumber;
     }
