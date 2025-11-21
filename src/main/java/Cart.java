@@ -17,7 +17,6 @@ public class Cart implements Serializable {
 
     public Cart() {
         extent.add(this);
-        ExtentClass.register(this);
     }
 
     public static void saveExtent() throws IOException {
