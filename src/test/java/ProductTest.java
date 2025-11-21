@@ -97,7 +97,7 @@ class ProductTest {
             new Product(
                     "/images/x.png",
                     50,
-                    "AB",   // too short
+                    "AB",
                     "Electronics",
                     "desc",
                     true
