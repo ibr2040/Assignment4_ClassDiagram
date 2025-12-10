@@ -12,8 +12,8 @@ public class Product implements Serializable {
     private String category;
     private String description;
     private Boolean availability;
-    private static double advertismentFee;
 
+    private static double advertismentFee;
     private static final List<Product> extent=new ArrayList<>();
     private static final String EXTENT_FILE="product_extent.ser";
 
