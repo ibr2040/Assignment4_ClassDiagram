@@ -124,7 +124,7 @@ public class Product implements Serializable {
         this.description = description;
         this.availability = availability;
 
-        extent.add(this );
+        extent.add(this);
     }
 
     public static void setAdvertismentFee(double fee){
