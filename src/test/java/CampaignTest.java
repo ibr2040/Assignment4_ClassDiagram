@@ -6,19 +6,19 @@ public class CampaignTest {
     @Test
     void testValidCampaignCreation() {
         Campaign c = new Campaign("Promo", 1000);
-        assertEquals(0, c.getCampaignFee()); // метод пока возвращает 0
+        assertEquals(0, c.getCampaignFee());
     }
 
     @Test
     void testInvalidCampaignName() {
-        assertThrows(InvalidFormatException.class, () -> {
+        assertThrows(IllegalArgumentException.class, () -> {
             new Campaign("", 500);
         });
     }
 
     @Test
     void testInvalidCampaignBudget() {
-        assertThrows(InvalidValueException.class, () -> {
+        assertThrows(IllegalArgumentException.class, () -> {
             new Campaign("Promo", -10);
         });
     }

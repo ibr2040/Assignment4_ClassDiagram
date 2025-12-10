@@ -267,18 +267,18 @@ class UserTest {
     @Test
     public void testMerchantBankAccountExceptions() {
 
-        assertThrows(EmptyFieldException.class, () ->
+        assertThrows(IllegalArgumentException.class, () ->
                 new Merchant("Alice", "a@a.com", "+123456789", "login", "password123",
                         "", "Street", "City", "State")
         );
 
 
-        assertThrows(InvalidFormatException.class, () ->
+        assertThrows(IllegalArgumentException.class, () ->
                 new Merchant("Alice", "a@a.com", "+123456789", "login", "password123",
                         "12345", "Street", "City", "State")
         );
 
-        assertThrows(InvalidFormatException.class, () ->
+        assertThrows(IllegalArgumentException.class, () ->
                 new Merchant("Alice", "a@a.com", "+123456789", "login", "password123",
                         "12AB345678", "Street", "City", "State")
         );

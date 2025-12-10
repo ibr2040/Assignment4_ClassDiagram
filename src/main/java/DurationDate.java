@@ -15,7 +15,7 @@ public class DurationDate implements Serializable {
         this.dateOfEstablishment = dateOfEstablishment;
         this.dateOfExpiration = dateOfExpiration;
         if (!(TimeLeft() > 0)) {
-            throw new InvalidValueException("The duration exceeds the maximum number of days");
+            throw new IllegalArgumentException("The duration exceeds the maximum number of days");
         }
         extent.add(this);
     }
@@ -58,7 +58,7 @@ public class DurationDate implements Serializable {
 
         Date(int year, int month, int day, int hour) {
             if (month < 1 || month > 12 || day < 1 || day > 31 || hour < 0 || hour > 23) {
-                throw new InvalidFormatException("Invalid date format");
+                throw new IllegalArgumentException("Invalid date format");
             }
             this.year = year;
             this.month = month;
