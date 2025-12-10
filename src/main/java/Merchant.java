@@ -16,13 +16,13 @@ public class Merchant extends User {
         super(fullName, email, mobileNumber, login, password, street, city, state);
 
         if (bankAccountNumber == null || bankAccountNumber.isBlank()) {
-            throw new EmptyFieldException("Bank account number cannot be empty");
+            throw new IllegalArgumentException("Bank account number cannot be empty");
         }
         if (bankAccountNumber.length()<5){
-            throw new EmptyFieldException("Bank account number length should be 5 digits");
+            throw new IllegalArgumentException("Bank account number length should be 5 digits");
         }
         if (!bankAccountNumber.startsWith("PL")){
-            throw new EmptyFieldException("Bank account number must start with PL");
+            throw new IllegalArgumentException("Bank account number must start with PL");
         }
 
         this.bankAccountNumber = bankAccountNumber;

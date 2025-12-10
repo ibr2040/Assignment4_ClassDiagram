@@ -18,15 +18,15 @@ public class DurationDateTest {
         DurationDate.Date start = new DurationDate.Date(2024, 5, 20, 10);
         DurationDate.Date end   = new DurationDate.Date(2024, 5, 15, 12);
 
-        assertThrows(InvalidValueException.class, () -> {
-            new DurationDate(start, end); // end < start
+        assertThrows(IllegalArgumentException.class, () -> {
+            new DurationDate(start, end);
         });
     }
 
     @Test
     void testDateLeapYear() {
         DurationDate.Date d = new DurationDate.Date(2024, 3, 1, 0);
-        assertEquals(31 + 29 + 1, d.getDays()); // 2024 — leap year
+        assertEquals(31 + 29 + 1, d.getDays());
     }
 
     @Test
@@ -37,16 +37,16 @@ public class DurationDateTest {
 
     @Test
     void testInvalidDateFormat() {
-        assertThrows(InvalidFormatException.class, () -> {
-            new DurationDate.Date(2024, 13, 5, 10); // недопустимый месяц
+        assertThrows(IllegalArgumentException.class, () -> {
+            new DurationDate.Date(2024, 13, 5, 10);
         });
 
-        assertThrows(InvalidFormatException.class, () -> {
-            new DurationDate.Date(2024, 2, 35, 5); // недопустимый день
+        assertThrows(IllegalArgumentException.class, () -> {
+            new DurationDate.Date(2024, 2, 35, 5);
         });
 
-        assertThrows(InvalidFormatException.class, () -> {
-            new DurationDate.Date(2024, 1, 10, 25); // недопустимый час
+        assertThrows(IllegalArgumentException.class, () -> {
+            new DurationDate.Date(2024, 1, 10, 25);
         });
     }
 }

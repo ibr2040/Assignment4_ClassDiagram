@@ -16,12 +16,12 @@ public class Campaign implements Serializable {
         if (!campaignName.equals("")) {
             this.campaignName = campaignName;
         } else {
-            throw new InvalidFormatException("Invalid campaign name");
+            throw new IllegalArgumentException("Invalid campaign name");
         }
         if (budget > 0) {
             this.budget = budget;
         } else {
-            throw new InvalidValueException("Invalid budget");
+            throw new IllegalArgumentException("Invalid budget");
         }
 
 
