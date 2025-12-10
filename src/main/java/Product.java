@@ -17,9 +17,7 @@ public class Product implements Serializable {
     private static final List<Product> extent=new ArrayList<>();
     private static final String EXTENT_FILE="product_extent.ser";
 
-    public static List<Product> getExtent() {
-        return extent;
-    }
+
     public Product(String image, double price, String title, String category, Boolean availability) {
 
         if (image == null || image.isBlank()) {
@@ -179,6 +177,10 @@ public class Product implements Serializable {
 
     public Boolean getAvailability() {
         return availability;
+    }
+
+    public static List<Product> getExtent() {
+        return extent;
     }
 
     public static double getAdvertismentFee() {
