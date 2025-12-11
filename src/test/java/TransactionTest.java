@@ -133,9 +133,21 @@ class TransactionTest {
     }
     @Test
     void testTransactionConstructorInitializesFields() {
-        Transaction t = new Transaction("BankA", "PersonB", 150.0, "USD");
+        StripeClient stripe = new StripeClient("client123");
 
-        assertEquals("BankA", t.getReceiverBankInformation());
+        LocalDate date = LocalDate.now().minusDays(1);
+
+        Transaction t = new Transaction(
+                "PL4242423432424",
+                "PersonB",
+                150.0,
+                "USD",
+                date,
+                stripe
+        );
+
+
+        assertEquals("PL4242423432424", t.getReceiveBankInformation());
         assertEquals("PersonB", t.getPayerInformation());
         assertEquals(150.0, t.getValue());
         assertEquals("USD", t.getCurrency());
@@ -144,13 +156,32 @@ class TransactionTest {
 
     @Test
     void testChildrenListInitiallyEmpty() {
-        Transaction t = new Transaction("A", "B", 10, "USD");
+        StripeClient stripe = new StripeClient("client1");
+        LocalDate date = LocalDate.now().minusDays(1);
+
+        Transaction t = new Transaction(
+                "BANKA1",
+                "Alice",
+                10.0,
+                "USD",
+                date,
+                stripe
+        );
+
         assertTrue(t.getChildren().isEmpty());
     }
 
     @Test
     void testParentInitiallyNull() {
-        Transaction t = new Transaction("A", "B", 10, "USD");
+        Transaction t = new Transaction(
+                "BANKA1",
+                "Alice",
+                10.0,
+                "USD",
+                LocalDate.now().minusDays(1),
+                new StripeClient("id1343")
+        );
+
         assertNull(t.getParent());
     }
 

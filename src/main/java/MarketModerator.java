@@ -41,6 +41,10 @@ public class MarketModerator extends Moderator{
     }
 
     public void removeSuspectedMerchant(String email) {
+        if (!suspectedMerchants.containsKey(email)) {
+            throw new IllegalArgumentException("No merchant with this email is in suspected list");
+        }
+
         suspectedMerchants.remove(email);
     }
 

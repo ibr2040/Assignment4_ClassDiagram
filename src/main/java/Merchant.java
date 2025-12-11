@@ -79,10 +79,13 @@ public class Merchant extends User {
     }
 
     public void deleteMerchant(){
-        for(Product p:new ArrayList<>(products)){
-            p.internalDestroy();
-        }
+        List<Product> copy = new ArrayList<>(products);
+
         products.clear();
+
+        for (Product p : copy) {
+            p.removeMerchant();
+        }
     }
 
     public List<Product> getProducts() {

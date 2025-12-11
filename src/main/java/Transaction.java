@@ -151,6 +151,7 @@ public class Transaction implements Serializable{
     public static List<Transaction> getExtent() {
         return extent;
     }
+
     //here functions from assigment 6
     public void addChild(Transaction child) {
 

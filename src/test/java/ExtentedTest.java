@@ -21,7 +21,7 @@ public class ExtentedTest {
     }
         @Test
         void testMerchantExtentPersistence() throws Exception {
-            Merchant m = new Merchant("Bob","bob@x.com","+123456789","log321","password123","1234567890","st","c","s");
+            Merchant m = new Merchant("Bob","bob@x.com","+123456789","log321","password123","PL1234567890","st","c","s");
 
 
             Merchant.saveExtent();
@@ -36,8 +36,7 @@ public class ExtentedTest {
         Campaign.getExtent().clear();
 
 
-        Campaign c = new Campaign("TestCamp", 100, List.of(new Product("a",1,"a","a","d",true)));
-
+        Campaign c = new Campaign("TestCamp", 100, List.of(new Product("/images/asdf.png",12,"sdfa","Electronics","sadff",true)));
 
         Campaign.saveExtent();
         Campaign.getExtent().clear();
@@ -60,7 +59,7 @@ public class ExtentedTest {
     @Test
     void testAdvertiserExtentPersistence() throws Exception {
         Advertiser.getExtent().clear();
-        Advertiser m = new Advertiser("Bob","bob@x.com","+123456789","log321","password123","st","c","s",new Campaign("TestCamp", 100, List.of(new Product("a",1,"a","a","d",true))));
+        Advertiser m = new Advertiser("Bob","bob@x.com","+123456789","log321","password123","st","c","s",new Campaign("TestCamp", 100, List.of(new Product("/images/a.png",133,"Liww","Electronics","fdfdd",true))));
 
 
         Advertiser.saveExtent();

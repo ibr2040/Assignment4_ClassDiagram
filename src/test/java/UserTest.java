@@ -231,7 +231,7 @@ class UserTest {
                 "Main St",
                 "NY",
                 "NY",
-                new Campaign("g",1,List.of(new Product("asdf",20, "TV", "g","asdf",true)))
+                new Campaign("g",1,List.of(new Product("/images/asdf.png",20, "TV3", "Electronics","asdf",true)))
         );
 
         Merchant m = new Merchant(
@@ -240,7 +240,7 @@ class UserTest {
                 "+987654321",
                 "aliceLogin",
                 "pass5555555",
-                "0140000071219812874",
+                "PL0140000071219812874",
                 "Market St",
                 "LA",
                 "CA"
@@ -287,15 +287,15 @@ class UserTest {
 
     @Test
     public void testValidMerchantCreation() {
-        Merchant m = new Merchant("Alice", "alice@mail.com", "+123456789", "login", "password123",
-                "1234567890", "Street", "City", "State");
+        Merchant m = new Merchant("Alice", "alice@mail.com", "+12345443436789", "login", "password1242343",
+                "PL3431234567890", "Street", "City", "State");
         assertNotNull(m);
     }
 
     @Test
     public void testValidAdvertiserCreation() {
         Advertiser a = new Advertiser("Bob", "bob@mail.com", "+987654321", "login", "password123",
-                "Street", "City", "State",new Campaign("g",1,List.of(new Product("asdf",20, "TV", "g","asdf",true))));
+                "Street", "City", "State",new Campaign("g3443",1,List.of(new Product("/images/asdf.png",20, "TV3", "Electronics","asdf",true))));
         assertNotNull(a);
     }
 }
