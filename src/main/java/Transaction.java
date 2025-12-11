@@ -22,6 +22,10 @@ public class Transaction implements Serializable{
 
     private final StripeClient stripeClient;
 
+    private Transaction parent;
+
+    private final List<Transaction> children=new ArrayList<>();
+
     public Transaction(String receiveBankInformation, String payerInformation, double value, String currency, LocalDate dateOfTransaction,StripeClient stripeClient) {
         if (receiveBankInformation == null || receiveBankInformation.isBlank()) {
             throw new IllegalArgumentException("Bank Information cannot be empty");
@@ -147,6 +151,81 @@ public class Transaction implements Serializable{
     public static List<Transaction> getExtent() {
         return extent;
     }
+    //here functions from assigment 6
+    public void addChild(Transaction child) {
 
-    
+        if (child == null) {
+            throw new IllegalArgumentException("Child transaction cannot be null");
+        }
+
+        if (child == this) {
+            throw new IllegalStateException("Transaction cannot be child of itself");
+        }
+
+        if (children.contains(child)) {
+            throw new IllegalStateException("This child is already connected");
+        }
+
+        if (child.getParent() != null) {
+            throw new IllegalStateException("This transaction already has a parent and cannot be reassigned.");
+        }
+
+        if (isAncestor(child)) {
+            throw new IllegalStateException("Cycle detected in reflexive association");
+        }
+
+        children.add(child);
+
+        child.setParent(this);
+    }
+    public void removeChild(Transaction child) {
+        if (!children.contains(child)) {
+            throw new IllegalArgumentException("Child not found in this parent");
+        }
+
+        children.remove(child);
+
+        child.setParent(null);
+    }
+    public void setParent(Transaction newParent) {
+        if (newParent == this) {
+            throw new IllegalStateException("Transaction cannot be its own parent");
+        }
+
+        if (newParent != null && newParent.isAncestor(this)) {
+            throw new IllegalStateException("Cycle detected in reflexive association");
+        }
+
+        if (this.parent == newParent) {
+            return;
+        }
+
+        if (this.parent != null) {
+            this.parent.children.remove(this);
+        }
+
+        this.parent = newParent;
+
+        if (newParent != null && !newParent.children.contains(this)) {
+            newParent.children.add(this);
+        }
+    }
+    public Transaction getParent() {
+        return parent;
+    }
+
+    public List<Transaction> getChildren() {
+        return new ArrayList<>(children);
+    }
+
+    private boolean isAncestor(Transaction candidate) {
+        Transaction current = this;
+        while (current != null) {
+            if (current == candidate){
+                return true;
+            }
+            current = current.parent;
+        }
+        return false;
+    }
 }

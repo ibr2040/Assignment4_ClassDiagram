@@ -1,6 +1,7 @@
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 
 public class Product implements Serializable {
@@ -17,8 +18,18 @@ public class Product implements Serializable {
     private static final List<Product> extent=new ArrayList<>();
     private static final String EXTENT_FILE="product_extent.ser";
 
+    private HashSet<ProductsQuantityCart> productQuantityCartList = new HashSet<>();
 
-    public Product(String image, double price, String title, String category, Boolean availability) {
+    private Campaign campaign;
+
+    private Merchant merchant;
+
+    private boolean isCompositionProduct;
+
+    public Product(String image, double price, String title, String category, Boolean availability,Merchant merchant) {
+        if (merchant == null) {
+            throw new IllegalArgumentException("Merchant cannot be null for composition constructor");
+        }
 
         if (image == null || image.isBlank()) {
             throw new IllegalArgumentException("Image cannot be empty");
@@ -59,8 +70,7 @@ public class Product implements Serializable {
         if (availability == null) {
             throw new IllegalArgumentException("Availability cannot be null");
         }
-
-
+        this.isCompositionProduct = true;
         this.image = image;
         this.price = price;
         this.title = title;
@@ -115,8 +125,7 @@ public class Product implements Serializable {
         if (availability == null) {
             throw new IllegalArgumentException("Availability cannot be null");
         }
-
-
+        this.isCompositionProduct=false;
         this.image = image;
         this.price = price;
         this.title = title;
@@ -125,6 +134,34 @@ public class Product implements Serializable {
         this.availability = availability;
 
         extent.add(this);
+    }
+    public void internalDestroy(){
+        this.merchant=null;
+    }
+    public Campaign getCampaign() {
+        return campaign;
+    }
+    public void removeCampaign(){
+        this.campaign=null;
+    }
+    public boolean isCompositionProduct() {
+        return isCompositionProduct;
+    }
+    public void addToCart(ProductsQuantityCart cart){
+        if (productQuantityCartList.contains(cart)||cart==null){return;}
+        productQuantityCartList.add(cart);
+    }
+    public void removeFromCart(ProductsQuantityCart cart){
+        if(!productQuantityCartList.contains(cart)||cart==null){return;}
+        productQuantityCartList.remove(cart);
+        cart.remove();
+    }
+
+    public void setCampaign(Campaign campaign) {
+        if (this.campaign != null && campaign != null) {
+            throw new IllegalStateException("Product already assigned to a campaign");
+        }
+        this.campaign = campaign;
     }
 
     public static void setAdvertismentFee(double fee){
@@ -153,7 +190,22 @@ public class Product implements Serializable {
         ois.close();
 
     }
+    public void setMerchant(Merchant merchant) {
+        if (isCompositionProduct) {
+            throw new UnsupportedOperationException(
+                    "This product is already assigned to a merchant and cannot be reassigned."
+            );
+        }
+        this.merchant = merchant;
+    }
 
+    public void removeMerchant() {
+        if (isCompositionProduct) {
+            throw new UnsupportedOperationException(
+                    "This product must always remain linked to its merchant and cannot be detached.");
+        }
+        this.merchant = null;
+    }
 
     public String getImage() {
         return image;
@@ -185,5 +237,13 @@ public class Product implements Serializable {
 
     public static double getAdvertismentFee() {
         return advertismentFee;
+    }
+
+    public Merchant getMerchant(){
+        return merchant;
+    }
+
+    public HashSet<ProductsQuantityCart> getCartsContainingProduct() {
+        return this.productQuantityCartList;
     }
 }

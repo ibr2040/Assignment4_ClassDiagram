@@ -1,5 +1,6 @@
 import java.io.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 public class Cart implements Serializable {
@@ -9,6 +10,8 @@ public class Cart implements Serializable {
     private static final String EXTENT_FILE = "cart_extent.ser";
 
     private List<Product> unavailableProducts=new ArrayList<>();
+
+    private HashSet<ProductsQuantityCart> productsQuantityCartList=new HashSet<>();
 
 
     public static List<Cart> getExtent(){
@@ -38,33 +41,31 @@ public class Cart implements Serializable {
     }
 
     public int getQuantityOfProducts(){
-        return unavailableProducts.size();
+        return productsQuantityCartList.size();
     }
 
-    public void addProduct(Product p){
+    public void addProduct(ProductsQuantityCart p){
         if (p==null){
             throw new IllegalArgumentException("Product cannot be null");
         }
-        if (p.getAvailability())
-            throw new IllegalArgumentException("Cannot add AVAILABLE product to unavailableProducts");
 
-        if (unavailableProducts.contains(p))
-            throw new IllegalArgumentException("Product already in cart");
-
-        unavailableProducts.add(p);
+        if(this.productsQuantityCartList.contains(p)||p==null){return;}
+        this.productsQuantityCartList.add(p);
+    }
+    public void removeProduct(ProductsQuantityCart p){
+        if (p==null||!this.productsQuantityCartList.contains(p)){return;}
+        this.productsQuantityCartList.remove(p);
+        p.remove();
     }
 
     public void clear(){
-        unavailableProducts.clear();
+        for(ProductsQuantityCart p:this.productsQuantityCartList){
+            this.removeProduct(p);
+        }
     }
 
-    public void changeQuantity(int newQuantity){
-        if (newQuantity<0){
-            throw new IllegalArgumentException("Quantity cannot be negative");
-        }
-        while(unavailableProducts.size()>newQuantity){
-            unavailableProducts.remove(unavailableProducts.size()-1);
-        }
+    public HashSet<ProductsQuantityCart> getProductsInTheCart() {
+        return this.productsQuantityCartList;
     }
 
     public List<Product> getUnavailableProducts() {

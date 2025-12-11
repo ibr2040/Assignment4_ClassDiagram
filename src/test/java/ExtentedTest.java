@@ -1,5 +1,7 @@
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ExtentedTest {
@@ -34,7 +36,7 @@ public class ExtentedTest {
         Campaign.getExtent().clear();
 
 
-        Campaign c = new Campaign("TestCamp", 100);
+        Campaign c = new Campaign("TestCamp", 100, List.of(new Product("a",1,"a","a","d",true)));
 
 
         Campaign.saveExtent();
@@ -58,7 +60,7 @@ public class ExtentedTest {
     @Test
     void testAdvertiserExtentPersistence() throws Exception {
         Advertiser.getExtent().clear();
-        Advertiser m = new Advertiser("Bob","bob@x.com","+123456789","log321","password123","st","c","s");
+        Advertiser m = new Advertiser("Bob","bob@x.com","+123456789","log321","password123","st","c","s",new Campaign("TestCamp", 100, List.of(new Product("a",1,"a","a","d",true))));
 
 
         Advertiser.saveExtent();

@@ -230,7 +230,8 @@ class UserTest {
                 "pass123555555",
                 "Main St",
                 "NY",
-                "NY"
+                "NY",
+                new Campaign("g",1,List.of(new Product("asdf",20, "TV", "g","asdf",true)))
         );
 
         Merchant m = new Merchant(
@@ -294,7 +295,7 @@ class UserTest {
     @Test
     public void testValidAdvertiserCreation() {
         Advertiser a = new Advertiser("Bob", "bob@mail.com", "+987654321", "login", "password123",
-                "Street", "City", "State");
+                "Street", "City", "State",new Campaign("g",1,List.of(new Product("asdf",20, "TV", "g","asdf",true))));
         assertNotNull(a);
     }
 }
