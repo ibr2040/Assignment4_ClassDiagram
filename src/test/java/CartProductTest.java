@@ -6,7 +6,7 @@ public class CartProductTest {
     @Test
     public void TestAddProductToCart() {
         Cart cart = new Cart();
-        Product p = new Product("asdf",12,"sdfa","asdf","sadff",true);
+        Product p = new Product("/images/asdf.png",12,"sdfa","Electronics","sadff",true);
         ProductsQuantityCart q=new ProductsQuantityCart(2,p,cart);
         assertTrue(p.getCartsContainingProduct().contains(q));
         assertTrue(cart.getProductsInTheCart().contains(q));
@@ -14,7 +14,7 @@ public class CartProductTest {
     @Test
     public void TestRemoveProductFromCart(){
         Cart cart = new Cart();
-        Product p = new Product("asdf",12,"sdfa","asdf","sadff",true);
+        Product p = new Product("/images/asdf.png",12,"sdfa","Electronics","sadff",true);
         ProductsQuantityCart q=new ProductsQuantityCart(2,p,cart);
         q.remove();
         assertFalse(p.getCartsContainingProduct().contains(q));
@@ -23,7 +23,7 @@ public class CartProductTest {
     @Test
     public void TestAddCartFromProduct(){
         Cart cart = new Cart();
-        Product p = new Product("asdf",12,"sdfa","asdf","sadff",true);
+        Product p = new Product("/images/asdf.png",12,"sdfa","Electronics","sadff",true);
         ProductsQuantityCart q=new ProductsQuantityCart(2,p,cart);
         assertTrue(p.getCartsContainingProduct().contains(q));
         assertTrue(cart.getProductsInTheCart().contains(q));
@@ -31,7 +31,7 @@ public class CartProductTest {
     @Test
     public void TestRemoveCartFromProduct(){
         Cart cart = new Cart();
-        Product p = new Product("asdf",12,"sdfa","asdf","sadff",true);
+        Product p = new Product("/images/asdf.png",12,"sdfa","Electronics","sadff",true);
         ProductsQuantityCart q=new ProductsQuantityCart(2,p,cart);
         p.removeFromCart(q);
         assertFalse(p.getCartsContainingProduct().contains(q));
@@ -40,7 +40,7 @@ public class CartProductTest {
     @Test
     public void TestAddingAlreadyExistingProductInCart(){
         Cart cart = new Cart();
-        Product p = new Product("asdf",12,"sdfa","asdf","sadff",true);
+        Product p = new Product("/images/asdf.png",12,"sdfa","Electronics","sadff",true);
         Product p2 = p;
         ProductsQuantityCart q = new ProductsQuantityCart(2,p,cart);
         ProductsQuantityCart q1 =new ProductsQuantityCart(2,p,cart);

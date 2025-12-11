@@ -77,6 +77,8 @@ public class Product implements Serializable {
         this.category = category;
         this.availability = availability;
 
+        this.merchant=merchant;
+
         extent.add(this );
     }
 
@@ -135,22 +137,24 @@ public class Product implements Serializable {
 
         extent.add(this);
     }
-    public void internalDestroy(){
-        this.merchant=null;
-    }
+
     public Campaign getCampaign() {
         return campaign;
     }
+
     public void removeCampaign(){
         this.campaign=null;
     }
+
     public boolean isCompositionProduct() {
         return isCompositionProduct;
     }
+
     public void addToCart(ProductsQuantityCart cart){
         if (productQuantityCartList.contains(cart)||cart==null){return;}
         productQuantityCartList.add(cart);
     }
+
     public void removeFromCart(ProductsQuantityCart cart){
         if(!productQuantityCartList.contains(cart)||cart==null){return;}
         productQuantityCartList.remove(cart);
@@ -161,7 +165,12 @@ public class Product implements Serializable {
         if (this.campaign != null && campaign != null) {
             throw new IllegalStateException("Product already assigned to a campaign");
         }
+
         this.campaign = campaign;
+
+        if (!campaign.getProducts().contains(this)){
+            campaign.addProduct(this);
+        }
     }
 
     public static void setAdvertismentFee(double fee){
@@ -191,20 +200,40 @@ public class Product implements Serializable {
 
     }
     public void setMerchant(Merchant merchant) {
-        if (isCompositionProduct) {
+        if (isCompositionProduct && this.merchant != null && this.merchant != merchant) {
             throw new UnsupportedOperationException(
                     "This product is already assigned to a merchant and cannot be reassigned."
             );
         }
+
+        Merchant old = this.merchant;
         this.merchant = merchant;
+
+        if (merchant != null && !merchant.getProducts().contains(this)) {
+            merchant.getProducts().add(this);
+        }
+
+        if (old != null && old != merchant) {
+            old.getProducts().remove(this);
+        }
     }
 
     public void removeMerchant() {
-        if (isCompositionProduct) {
+        if (isCompositionProduct && merchant != null && !merchant.getProducts().isEmpty()) {
             throw new UnsupportedOperationException(
-                    "This product must always remain linked to its merchant and cannot be detached.");
+                    "This product must always remain linked to its merchant and cannot be detached."
+            );
         }
-        this.merchant = null;
+
+        if (this.merchant != null) {
+            Merchant oldMerchant = this.merchant;
+            this.merchant = null;
+
+            if (oldMerchant.getProducts().contains(this)) {
+                oldMerchant.getProducts().remove(this);
+            }
+        }
+
     }
 
     public String getImage() {

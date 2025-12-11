@@ -12,7 +12,11 @@ public class Advertiser extends User{
                            String state,
                            Campaign campaign
     ){
+
         super(fullName, email, mobileNumber, login, password,street,city,state);
+        if (campaign == null) {
+            throw new IllegalArgumentException("Advertiser must have at least one initial campaign");
+        }
         campaigns.add(campaign);
     }
     public void addCampaign(Campaign campaign){

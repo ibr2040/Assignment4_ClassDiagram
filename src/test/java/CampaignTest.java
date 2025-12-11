@@ -8,7 +8,7 @@ public class CampaignTest {
 
     @Test
     void testValidCampaignCreation() {
-        Campaign c = new Campaign("Promo", 1000, List.of(new Product("asdf",12,"sdfa","asdf","sadff",true)));
+        Campaign c = new Campaign("Promo", 1000, List.of(new Product("/images/asdf.png",12,"sdfa","Electronics","sadff",true)));
         assertEquals(0, c.getCampaignFee());
     }
 
