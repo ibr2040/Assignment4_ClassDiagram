@@ -8,7 +8,7 @@ abstract class User implements Serializable{
     private static final String EXTENT_FILE = "user_extent.ser";
 
     private String fullName;
-    private String email;
+    protected String email;
     private String mobileNumber;
     private ShippingAddress shippingAddress;
     private String login;
