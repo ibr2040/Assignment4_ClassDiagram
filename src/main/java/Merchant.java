@@ -67,7 +67,9 @@ public class Merchant extends User {
             p.removeMerchant();
         }
     }
-
+    public void removeSuprevisor(){
+        this.suprevisor=null;
+    }
     public List<Product> getProducts() {
         return products;
     }

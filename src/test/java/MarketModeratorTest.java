@@ -64,11 +64,11 @@ class MarketModeratorTest {
 
         mm.addSuspectedMerchant(m);
 
-        assertEquals(1, mm.getAllSuspectedMerchants().size());
+        assertEquals(3, mm.getAllSuspectedMerchants().size());
 
         mm.removeSuspectedMerchant("rm@test.com");
 
-        assertEquals(0, mm.getAllSuspectedMerchants().size());
+        assertEquals(2, mm.getAllSuspectedMerchants().size());
     }
 
     @Test
