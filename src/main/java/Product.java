@@ -199,24 +199,6 @@ public class Product implements Serializable {
         ois.close();
 
     }
-    public void setMerchant(Merchant merchant) {
-        if (isCompositionProduct && this.merchant != null && this.merchant != merchant) {
-            throw new UnsupportedOperationException(
-                    "This product is already assigned to a merchant and cannot be reassigned."
-            );
-        }
-
-        Merchant old = this.merchant;
-        this.merchant = merchant;
-
-        if (merchant != null && !merchant.getProducts().contains(this)) {
-            merchant.getProducts().add(this);
-        }
-
-        if (old != null && old != merchant) {
-            old.getProducts().remove(this);
-        }
-    }
 
     public void removeMerchant() {
         if (isCompositionProduct && merchant != null && !merchant.getProducts().isEmpty()) {
@@ -233,7 +215,6 @@ public class Product implements Serializable {
                 oldMerchant.getProducts().remove(this);
             }
         }
-
     }
 
     public String getImage() {
@@ -274,5 +255,62 @@ public class Product implements Serializable {
 
     public HashSet<ProductsQuantityCart> getCartsContainingProduct() {
         return this.productQuantityCartList;
+    }
+
+    public void setPrice(Merchant m,double price) {
+        if(!(merchant == m)){throw new UnsupportedOperationException("You are not allowed to modify product");}
+        if (price < 0) {
+            throw new IllegalArgumentException("Price cannot be negative");
+        }
+
+        if (price == 0) {
+            throw new IllegalArgumentException("Price cannot be zero");
+        }
+
+        if (price > 100_000) {
+            throw new IllegalArgumentException("Price exceeds allowed maximum");
+        }
+        this.price = price;
+    }
+
+    public void setImage(Merchant m,String image) {
+        if(!(merchant == m)){throw new UnsupportedOperationException("You are not allowed to modify product");}
+        if (image == null || image.isBlank()) {
+            throw new IllegalArgumentException("Image cannot be empty");
+        }
+
+        if (!image.matches("/images/[A-Za-z0-9_]+\\.(png|jpg)")) {
+            throw new IllegalArgumentException("Image must be in /images/... path and PNG/JPG");
+        }
+        this.image = image;
+    }
+
+    public void setTitle(Merchant m,String title) {
+        if(!(merchant == m)){throw new UnsupportedOperationException("You are not allowed to modify product");}
+        if (title == null || title.isBlank()) {
+            throw new IllegalArgumentException("Title cannot be empty");
+        }
+
+        if (title.length() < 3) {
+            throw new IllegalArgumentException("Title must have at least 3 characters");
+        }
+        this.title = title;
+    }
+
+    public void setCategory(Merchant m,String category) {
+        if(!(merchant == m)){throw new UnsupportedOperationException("You are not allowed to modify product");}
+        if (category == null || category.isBlank()) {
+            throw new IllegalArgumentException("Category cannot be empty");
+        }
+
+        if (!allowedCategories.contains(category)) {
+            throw new IllegalArgumentException("Category not allowed: " + category);
+        }
+        this.category = category;
+    }
+
+    public void setDescription(Merchant m,String description) {
+        if(!(merchant == m)){throw new UnsupportedOperationException("You are not allowed to modify product");}
+        this.description = description;
     }
 }

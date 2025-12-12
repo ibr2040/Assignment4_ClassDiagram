@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 public class MarketModerator extends Moderator{
-    private Map<String,Merchant> suspectedMerchants = new HashMap<>();
+    private static Map<String,Merchant> suspectedMerchants = new HashMap<>();
 
     public MarketModerator(String fullName,
                            String email,
@@ -28,6 +28,7 @@ public class MarketModerator extends Moderator{
             throw new IllegalArgumentException("Merchant already suspected");
 
         suspectedMerchants.put(key, merchant);
+        merchant.addSupervisor(this);
     }
 
     public Merchant getSuspectedMerchantByEmail(String email) {
@@ -44,7 +45,7 @@ public class MarketModerator extends Moderator{
         if (!suspectedMerchants.containsKey(email)) {
             throw new IllegalArgumentException("No merchant with this email is in suspected list");
         }
-
+        suspectedMerchants.get(email).removeSuprevisor();
         suspectedMerchants.remove(email);
     }
 
@@ -59,5 +60,8 @@ public class MarketModerator extends Moderator{
     public void deleteProduct(Product p) {
         System.out.println("Product deleted: " + p.getTitle());
     }
-
+    public void updateEmail(Merchant merchant, String email,String newEmail) {
+        suspectedMerchants.remove(email);
+        suspectedMerchants.put(newEmail, merchant);
+    }
 }
