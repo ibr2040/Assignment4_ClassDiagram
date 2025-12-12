@@ -3,7 +3,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class Merchant extends User {
-    private final List<Product> products=new ArrayList<>();
+    private List<Product> products=new ArrayList<>();
     private String bankAccountNumber;
 
     public Merchant(
@@ -89,7 +89,7 @@ public class Merchant extends User {
     }
 
     public List<Product> getProducts() {
-        return Collections.unmodifiableList(products);
+        return products;
     }
 
     public void viewInventory() {
