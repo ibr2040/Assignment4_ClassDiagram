@@ -7,7 +7,7 @@ abstract class User implements Serializable{
     private static final List<User> extent=new ArrayList<>();
     private static final String EXTENT_FILE = "user_extent.ser";
 
-    private String fullName;
+    protected String fullName;
     protected String email;
     private String mobileNumber;
     private ShippingAddress shippingAddress;

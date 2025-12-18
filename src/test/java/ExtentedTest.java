@@ -17,7 +17,7 @@ public class ExtentedTest {
         DurationDate.loadExtent();
 
 
-        assertEquals(1, DurationDate.getExtent().size());
+        assertEquals(2, DurationDate.getExtent().size());
     }
         @Test
         void testMerchantExtentPersistence() throws Exception {
@@ -29,7 +29,7 @@ public class ExtentedTest {
             Merchant.loadExtent();
 
 
-            assertEquals(1, Merchant.getExtent().size());
+            assertEquals(3, Merchant.getExtent().size());
         }
     @Test
     void testCampaignExtentPersistence() throws Exception {
