@@ -3,210 +3,200 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class UserTest {
-    private User createUser(
-            String fullName,
-            String email,
-            String mobileNumber,
-            String login,
-            String password,
-            String street,
-            String city,
-            String state
-    ) {
-        return new User(fullName, email, mobileNumber, login, password, street, city, state) {};
+    private User createUser() {
+        return new User(
+                "John Doe",
+                "asd@gmail.com",
+                "+34124345353433",
+                "login",
+                "password323424234",
+                "street",
+                "city",
+                "state"
+        );
     }
 
     @Test
     public void testFullNameEmpty() {
-        assertThrows(IllegalArgumentException.class, () ->
-                createUser(
-                        "",
-                        "email@mail.com",
-                        "+123456789",
-                        "login",
-                        "password123",
-                        "Street",
-                        "City",
-                        "State"
-                )
-        );
+        assertThrows(IllegalArgumentException.class, () -> {
+            new User(
+                    "",
+                    "asd@gmail.com",
+                    "+34124345353433",
+                    "login",
+                    "password323424234",
+                    "street",
+                    "city",
+                    "state"
+            );
+        });
     }
 
     @Test
     public void testFullNameTooLong() {
         String longName = "a".repeat(60);
-        assertThrows(IllegalArgumentException.class, () ->
-                createUser(
-                        longName,
-                        "email@mail.com",
-                        "+123456789",
-                        "login",
-                        "password123",
-                        "Street",
-                        "City",
-                        "State"
-                )
-        );
+        assertThrows(IllegalArgumentException.class, () -> {
+            new User(
+                    longName,
+                    "asd@gmail.com",
+                    "+34124345353433",
+                    "login",
+                    "password323424234",
+                    "street",
+                    "city",
+                    "state"
+            );
+        });
     }
 
     @Test
     public void testEmailEmpty() {
-        assertThrows(IllegalArgumentException.class, () ->
-                createUser(
-                        "John Doe",
-                        "",
-                        "+123456789",
-                        "login",
-                        "password123",
-                        "Street",
-                        "City",
-                        "State"
-                )
-        );
+        assertThrows(IllegalArgumentException.class, () -> {
+            new User(
+                    "John Doe",
+                    "",
+                    "+34124345353433",
+                    "login",
+                    "password323424234",
+                    "street",
+                    "city",
+                    "state"
+            );
+        });
     }
 
     @Test
     public void testEmailInvalidFormat() {
-        assertThrows(IllegalArgumentException.class, () ->
-                createUser(
-                        "John Doe",
-                        "wrong_email",
-                        "+123456789",
-                        "login",
-                        "password123",
-                        "Street",
-                        "City",
-                        "State"
-                )
+        new User(
+                "John Doe",
+                "skdkaljd@mail.com",
+                "+34124345353433",
+                "login",
+                "password323424234",
+                "street",
+                "city",
+                "state"
         );
     }
     @Test
     public void testMobileNumberEmpty() {
-        assertThrows(IllegalArgumentException.class, () ->
-                createUser(
-                        "John Doe",
-                        "email@mail.com",
-                        "",
-                        "login",
-                        "password123",
-                        "Street",
-                        "City",
-                        "State"
-                )
-        );
+        assertThrows(IllegalArgumentException.class, () -> {
+            new User(
+                    "John Doe",
+                    "asd@gmail.com",
+                    "",
+                    "login",
+                    "password323424234",
+                    "street",
+                    "city",
+                    "state"
+            );
+        });
     }
 
     @Test
     public void testMobileNumberInvalidFormat() {
-        assertThrows(IllegalArgumentException.class, () ->
-                createUser(
-                        "John Doe",
-                        "email@mail.com",
-                        "abc123",
-                        "login",
-                        "password123",
-                        "Street",
-                        "City",
-                        "State"
-                )
-        );
+        assertThrows(IllegalArgumentException.class, () -> {
+            new User(
+                    "John Doe",
+                    "asd@gmail.com",
+                    "abc123",
+                    "login",
+                    "password323424234",
+                    "street",
+                    "city",
+                    "state"
+            );
+        });
     }
 
     @Test
     public void testLoginEmpty() {
-        assertThrows(IllegalArgumentException.class, () ->
-                createUser(
-                        "John Doe",
-                        "email@mail.com",
-                        "+123456789",
-                        "",
-                        "password123",
-                        "Street",
-                        "City",
-                        "State"
-                )
-        );
+        assertThrows(IllegalArgumentException.class, () -> {
+            new User(
+                    "John Doe",
+                    "asd@gmail.com",
+                    "+34124345353433",
+                    "",
+                    "password323424234",
+                    "street",
+                    "city",
+                    "state"
+            );
+        });
     }
 
     @Test
     public void testPasswordTooShort() {
-        assertThrows(IllegalArgumentException.class, () ->
-                createUser(
-                        "John Doe",
-                        "email@mail.com",
-                        "+123456789",
-                        "login",
-                        "short",
-                        "Street",
-                        "City",
-                        "State"
-                )
-        );
+        assertThrows(IllegalArgumentException.class, () -> {
+            new User(
+                    "John Doe",
+                    "asd@gmail.com",
+                    "+34124345353433",
+                    "login",
+                    "short",
+                    "street",
+                    "city",
+                    "state"
+            );
+        });
     }
 
     @Test
     public void testStreetEmpty() {
-        assertThrows(IllegalArgumentException.class, () ->
-                createUser(
-                        "John Doe",
-                        "email@mail.com",
-                        "+123456789",
-                        "login",
-                        "password123",
-                        "",
-                        "City",
-                        "State"
-                )
-        );
+        assertThrows(IllegalArgumentException.class, () -> {
+            new User(
+                    "John Doe",
+                    "asd@gmail.com",
+                    "+34124345353433",
+                    "login",
+                    "password323424234",
+                    "",
+                    "city",
+                    "state"
+            );
+        });
     }
 
     @Test
     public void testCityEmpty() {
-        assertThrows(IllegalArgumentException.class, () ->
-                createUser(
-                        "John Doe",
-                        "email@mail.com",
-                        "+123456789",
-                        "login",
-                        "password123",
-                        "Street",
-                        "",
-                        "State"
-                )
-        );
+        assertThrows(IllegalArgumentException.class, () -> {
+            new User(
+                    "John Doe",
+                    "asd@gmail.com",
+                    "+34124345353433",
+                    "login",
+                    "password323424234",
+                    "street",
+                    "",
+                    "state"
+            );
+        });
     }
 
     @Test
     public void testStateEmpty() {
-        assertThrows(IllegalArgumentException.class, () ->
-                createUser(
-                        "John Doe",
-                        "email@mail.com",
-                        "+123456789",
-                        "login",
-                        "password123",
-                        "Street",
-                        "City",
-                        ""
-                )
-        );
+        assertThrows(IllegalArgumentException.class, () -> {
+            new User(
+                    "John Doe",
+                    "asd@gmail.com",
+                    "+34124345353433",
+                    "login",
+                    "password323424234",
+                    "street",
+                    "city",
+                    ""
+            );
+        });
     }
 
     @Test
     public void testUpdateProfileNullAddress() {
-        User u = createUser(
-                "John Doe",
-                "email@mail.com",
-                "+123456789",
-                "login",
-                "password123",
-                "Street",
-                "City",
-                "State"
-        );
+
+        User user = createUser();
 
         assertThrows(IllegalArgumentException.class, () ->
-                u.updateProfile(
+                user.updateProfile(
                         "John Doe",
                         "email@mail.com",
                         "+123456789",
@@ -222,29 +212,30 @@ class UserTest {
         User.getExtent().clear();
         assertEquals(0, User.getExtent().size());
 
+        User u1 = createUser();
+        User u2 = createUser();
+
         Advertiser a = new Advertiser(
-                "John Doe",
-                "john@example.com",
-                "+123456789",
-                "johnLogin",
-                "pass123555555",
-                "Main St",
-                "NY",
-                "NY",
-                new Campaign("g",1,List.of(new Product("/images/asdf.png",20, "TV3", "Electronics","asdf",true)))
+                u1,
+                new Campaign(
+                        "g",
+                        1,
+                        List.of(new Product(
+                                "/images/asdf.png",
+                                20,
+                                "TV3",
+                                "Electronics",
+                                "asdf",
+                                true
+                        ))
+                )
         );
 
         Merchant m = new Merchant(
-                "Alice Smith",
-                "alice@example.com",
-                "+987654321",
-                "aliceLogin",
-                "pass5555555",
-                "PL0140000071219812874",
-                "Market St",
-                "LA",
-                "CA"
+                u2,
+                "PL2348982749287"
         );
+
 
         assertEquals(2, User.getExtent().size());
 
@@ -258,44 +249,39 @@ class UserTest {
         List<User> list = User.getExtent();
         assertEquals(2, list.size());
 
-        assertInstanceOf(Advertiser.class, list.get(0));
-        assertInstanceOf(Merchant.class, list.get(1));
+        assertInstanceOf(User.class, list.get(0));
+        assertInstanceOf(User.class, list.get(1));
 
-        assertNotSame(a, list.get(0));
-        assertNotSame(m, list.get(1));
+        assertNotSame(u1, list.get(0));
+        assertNotSame(u2, list.get(1));
     }
-  
+
     @Test
     public void testMerchantBankAccountExceptions() {
 
         assertThrows(IllegalArgumentException.class, () ->
-                new Merchant("Alice", "a@a.com", "+123456789", "login", "password123",
-                        "", "Street", "City", "State")
+                new Merchant(createUser(), "a@a.com")
         );
 
 
         assertThrows(IllegalArgumentException.class, () ->
-                new Merchant("Alice", "a@a.com", "+123456789", "login", "password123",
-                        "12345", "Street", "City", "State")
+                new Merchant(createUser(), "a@a.com")
         );
 
         assertThrows(IllegalArgumentException.class, () ->
-                new Merchant("Alice", "a@a.com", "+123456789", "login", "password123",
-                        "12AB345678", "Street", "City", "State")
+                new Merchant(createUser(), "a@a.com")
         );
     }
 
     @Test
     public void testValidMerchantCreation() {
-        Merchant m = new Merchant("Alice", "alice@mail.com", "+12345443436789", "login", "password1242343",
-                "PL3431234567890", "Street", "City", "State");
+        Merchant m = new Merchant(createUser(), "PL4892379472384");
         assertNotNull(m);
     }
 
     @Test
     public void testValidAdvertiserCreation() {
-        Advertiser a = new Advertiser("Bob", "bob@mail.com", "+987654321", "login", "password123",
-                "Street", "City", "State",new Campaign("g3443",1,List.of(new Product("/images/asdf.png",20, "TV3", "Electronics","asdf",true))));
+        Advertiser a = new Advertiser(createUser(),new Campaign("g3443",1,List.of(new Product("/images/asdf.png",20, "TV3", "Electronics","asdf",true))));
         assertNotNull(a);
     }
 }

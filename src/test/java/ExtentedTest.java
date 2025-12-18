@@ -5,6 +5,19 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ExtentedTest {
+    private User createUser() {
+        return new User(
+                "John Doe",
+                "asd@gmail.com",
+                "+34124345353433",
+                "login",
+                "password323424234",
+                "street",
+                "city",
+                "state"
+        );
+    }
+
     @Test
     void testDurationExtentPersistence() throws Exception {
         DurationDate.Date d1 = new DurationDate.Date(2024,5,10,12);
@@ -21,15 +34,15 @@ public class ExtentedTest {
     }
         @Test
         void testMerchantExtentPersistence() throws Exception {
-            Merchant m = new Merchant("Bob","bob@x.com","+123456789","log321","password123","PL1234567890","st","c","s");
+            Merchant m = new Merchant(createUser(),"PL2472972982");
 
 
-            Merchant.saveExtent();
-            Merchant.getExtent().clear();
-            Merchant.loadExtent();
+            User.saveExtent();
+            User.getExtent().clear();
+            User.loadExtent();
 
 
-            assertEquals(1, Merchant.getExtent().size());
+            assertEquals(1, User.getExtent().size());
         }
     @Test
     void testCampaignExtentPersistence() throws Exception {
@@ -58,15 +71,15 @@ public class ExtentedTest {
     }
     @Test
     void testAdvertiserExtentPersistence() throws Exception {
-        Advertiser.getExtent().clear();
-        Advertiser m = new Advertiser("Bob","bob@x.com","+123456789","log321","password123","st","c","s",new Campaign("TestCamp", 100, List.of(new Product("/images/a.png",133,"Liww","Electronics","fdfdd",true))));
+        User.getExtent().clear();
+        Advertiser m = new Advertiser(createUser(),new Campaign("TestCamp", 100, List.of(new Product("/images/a.png",133,"Liww","Electronics","fdfdd",true))));
 
 
-        Advertiser.saveExtent();
-        Advertiser.getExtent().clear();
-        Advertiser.loadExtent();
+        User.saveExtent();
+        User.getExtent().clear();
+        User.loadExtent();
 
 
-        assertEquals(1, Advertiser.getExtent().size());
+        assertEquals(1, User.getExtent().size());
     }
 }

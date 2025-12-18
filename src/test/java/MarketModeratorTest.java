@@ -3,6 +3,19 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class MarketModeratorTest {
+    private User createUser() {
+        return new User(
+                "John Doe",
+                "asd@gmail.com",
+                "+34124345353433",
+                "login",
+                "password323424234",
+                "street",
+                "city",
+                "state"
+        );
+    }
+
     @Test
     void testAddSuspectedMerchant() {
         MarketModerator mm = new MarketModerator(
@@ -11,15 +24,12 @@ class MarketModeratorTest {
         );
 
         Merchant merchant = new Merchant(
-                "John Doe", "merchant@example.com", "+555000111",
-                "johnLogin", "merchantPass123",
-                "PL61109010140000071219812874",
-                "Street", "City", "State"
+                createUser(), "PL23487942372"
         );
 
         mm.addSuspectedMerchant(merchant);
 
-        assertEquals(merchant, mm.getSuspectedMerchantByEmail("merchant@example.com"));
+        assertEquals(merchant, mm.getSuspectedMerchantByEmail("asd@gmail.com"));
     }
 
     @Test
@@ -30,16 +40,11 @@ class MarketModeratorTest {
         );
 
         Merchant m1 = new Merchant(
-                "J", "aaa@bbb.com", "+13453455511", "l1", "password999",
-                "PL61109010140000071219812874",
-                "st", "c", "s"
+                createUser(), "PL32423492739"
         );
 
         Merchant m2 = new Merchant(
-                "K", "aaa@bbb.com", "+234535422", "l2", "password111",
-                "PL44500105175407324931",
-                "xx", "yy", "zz"
-        );
+                createUser(), "PL3479987389278972");
 
         mm.addSuspectedMerchant(m1);
 
@@ -56,17 +61,14 @@ class MarketModeratorTest {
         );
 
         Merchant m = new Merchant(
-                "John", "rm@test.com", "+11443534531",
-                "login", "password888",
-                "PL61109010140000071219812874",
-                "Street", "City", "State"
+                createUser(), "PL234792872874284232"
         );
 
         mm.addSuspectedMerchant(m);
 
         assertEquals(1, mm.getAllSuspectedMerchants().size());
 
-        mm.removeSuspectedMerchant("rm@test.com");
+        mm.removeSuspectedMerchant("asd@gmail.com");
 
         assertEquals(0, mm.getAllSuspectedMerchants().size());
     }

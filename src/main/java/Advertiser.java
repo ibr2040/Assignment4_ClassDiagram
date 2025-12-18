@@ -1,22 +1,19 @@
 import java.util.HashSet;
 
-public class Advertiser extends User{
+public class Advertiser{
+    private User user;
     private HashSet<Campaign> campaigns = new HashSet <> ();
-    public Advertiser(     String fullName,
-                           String email,
-                           String mobileNumber,
-                           String login,
-                           String password,
-                           String street,
-                           String city,
-                           String state,
-                           Campaign campaign
-    ){
 
-        super(fullName, email, mobileNumber, login, password,street,city,state);
+    public Advertiser(User user,Campaign campaign){
+
         if (campaign == null) {
             throw new IllegalArgumentException("Advertiser must have at least one initial campaign");
         }
+
+        if (user==null){
+            throw  new IllegalArgumentException();
+        }
+        this.user=user;
         campaigns.add(campaign);
     }
     public void addCampaign(Campaign campaign){
@@ -33,5 +30,9 @@ public class Advertiser extends User{
             this.campaigns.remove(campaign);
             System.out.println("Advertiser: cancel campaign");
         }
+    }
+
+    public String getEmail(){
+        return user.getEmail();
     }
 }

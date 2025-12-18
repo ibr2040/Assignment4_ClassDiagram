@@ -2,7 +2,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-abstract class User implements Serializable{
+public class User implements Serializable{
 
     private static final List<User> extent=new ArrayList<>();
     private static final String EXTENT_FILE = "user_extent.ser";
@@ -68,9 +68,11 @@ abstract class User implements Serializable{
             ShippingAddress shippingAddress,
             String login,
             String password) {
-        if (shippingAddress==null){
-            throw new IllegalArgumentException("Address cannot be empty");
+
+        if (shippingAddress == null) {
+            throw new IllegalArgumentException("Address cannot be null");
         }
+
         this.email = email;
         this.fullName = fullName;
         this.mobileNumber = mobileNumber;

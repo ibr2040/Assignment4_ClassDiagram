@@ -2,22 +2,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class Merchant extends User {
+public class Merchant {
+    private User user;
     private final List<Product> products=new ArrayList<>();
     private String bankAccountNumber;
 
-    public Merchant(
-            String fullName,
-            String email,
-            String mobileNumber,
-            String login,
-            String password,
-            String bankAccountNumber,
-            String street,
-            String city,
-            String state
-    ) {
-        super(fullName, email, mobileNumber, login, password, street, city, state);
+    public Merchant(User user,String bankAccountNumber) {
 
         if (bankAccountNumber == null || bankAccountNumber.isBlank()) {
             throw new IllegalArgumentException("Bank account number cannot be empty");
@@ -29,8 +19,13 @@ public class Merchant extends User {
             throw new IllegalArgumentException("Bank account number must start with PL");
         }
 
+        if (user == null) {
+            throw new IllegalArgumentException("User data required");
+        }
+        this.user=user;
         this.bankAccountNumber = bankAccountNumber;
     }
+
     public Product createProduct(String image,double price,String title,String category,boolean availability){
         Product p=new Product(image,price,title,category,availability,this);
         products.add(p);
@@ -89,7 +84,7 @@ public class Merchant extends User {
     }
 
     public List<Product> getProducts() {
-        return Collections.unmodifiableList(products);
+        return products;
     }
 
     public void viewInventory() {
@@ -103,4 +98,13 @@ public class Merchant extends User {
     public void addProduct() {
         System.out.println("Merchant add product");
     }
+
+    public String getEmail(){
+        return user.getEmail();
+    }
+
+    public String getFullName() {
+        return user.getFullName();
+    }
+
 }
