@@ -4,8 +4,8 @@ import java.util.List;
 public class Support extends Moderator {
     private List<String> ticketsHistory = new ArrayList<>();
 
-    public Support(String fullName, String email, String mobileNumber, String login, String password, String street, String city, String state, String employeeNumber) {
-        super(fullName, email, mobileNumber, login, password, street, city, state, employeeNumber);
+    public Support(String fullName, String email, String mobileNumber, String login, String password, String street, String city, String state, String employeeNumber,Admin admin) {
+        super(fullName, email, mobileNumber, login, password, street, city, state, employeeNumber,admin);
     }
 
     public void closeTicket(String ticket) {

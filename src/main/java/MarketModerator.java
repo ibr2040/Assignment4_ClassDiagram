@@ -14,8 +14,9 @@ public class MarketModerator extends Moderator{
                            String street,
                            String city,
                            String state,
-                           String employeeNumber) {
-        super(fullName, email, mobileNumber, login, password, street, city, state, employeeNumber);
+                           String employeeNumber,
+                           Admin admin) {
+        super(fullName, email, mobileNumber, login, password, street, city, state, employeeNumber,admin);
     }
 
     public void addSuspectedMerchant(Merchant merchant) {
