@@ -79,7 +79,7 @@ class MarketModeratorMerchantTest {
                 "St", "C", "S", "EMP123"
         );
 
-        User u = new Regular(
+        User u = new Merchant(
                 "Bob1243", "bob@example.com", "+111222333",
                 "loginBob", "password000",
                 "Street", "City", "State", "EMP777"

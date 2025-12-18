@@ -1,21 +1,10 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class Admin extends Moderator{
+public class Admin{
 
-    List<String> archiveLogs=new ArrayList<>();
+    static List<String> archiveLogs=new ArrayList<>();
 
-    public Admin(String fullName,
-                 String email,
-                 String mobileNumber,
-                 String login,
-                 String password,
-                 String street,
-                 String city,
-                 String state,
-                 String employeeNumber) {
-        super(fullName, email, mobileNumber, login, password, street, city, state, employeeNumber);
-    }
 
     public List<String> getArchiveLogs() {
         return archiveLogs;

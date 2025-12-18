@@ -8,7 +8,7 @@ class ModeratorTest {
         Moderator m = new Moderator(
                 "John Doe", "mod@example.com", "+111222333",
                 "login", "password123",
-                "Main St", "NY", "NY", "EMP001"
+                "Main St", "NY", "NY", "EMP001",null
         );
 
         assertEquals("EMP001", m.getEmployeeNumber());
@@ -21,7 +21,7 @@ class ModeratorTest {
                 new Moderator(
                         "John", "a@a.com", "+111222333",
                         "l", "password123",
-                        "St", "C", "S", ""
+                        "St", "C", "S", "",null
                 )
         );
     }
