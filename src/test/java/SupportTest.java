@@ -14,7 +14,8 @@ public class SupportTest {
                 "Main St",
                 "NY",
                 "NY",
-                "EMP001"
+                "EMP001",
+                null
         );
 
         support.addTicketToHistory("Ticket #1");
@@ -34,7 +35,8 @@ public class SupportTest {
                 "Main St",
                 "NY",
                 "NY",
-                "EMP001"
+                "EMP001",
+                null
         );
 
         support.addTicketToHistory("Ticket #1");
@@ -53,7 +55,8 @@ public class SupportTest {
                 "Main St",
                 "NY",
                 "NY",
-                "EMP001"
+                "EMP001",
+                null
         );
 
         Exception ex = assertThrows(IllegalArgumentException.class, () ->
@@ -73,7 +76,8 @@ public class SupportTest {
                 "Main St",
                 "NY",
                 "NY",
-                "EMP001"
+                "EMP001",
+                null
         );
 
         assertThrows(IllegalArgumentException.class, () ->

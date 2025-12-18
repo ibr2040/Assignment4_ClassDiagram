@@ -7,7 +7,7 @@ class MarketModeratorMerchantTest {
     void testAddSuspectedMerchant() {
         MarketModerator mm = new MarketModerator(
                 "Mod", "mod@example.com", "+123456789", "modLogin",
-                "longpassword", "Main", "NY", "NY", "EMP001"
+                "longpassword", "Main", "NY", "NY", "EMP001",null
         );
 
         Merchant merchant = new Merchant(
@@ -26,7 +26,7 @@ class MarketModeratorMerchantTest {
     void testDuplicateSuspectedMerchantThrows() {
         MarketModerator mm = new MarketModerator(
                 "Mod", "mod@example.com", "+123456789", "modLogin",
-                "longpassword", "Main", "NY", "NY", "EMP001"
+                "longpassword", "Main", "NY", "NY", "EMP001",null
         );
 
         Merchant m1 = new Merchant(
@@ -52,7 +52,7 @@ class MarketModeratorMerchantTest {
     void testRemoveSuspectedMerchant() {
         MarketModerator mm = new MarketModerator(
                 "Mod", "mod@example.com", "+123456789", "modLogin",
-                "longpassword", "Main", "NY", "NY", "EMP001"
+                "longpassword", "Main", "NY", "NY", "EMP001",null
         );
 
         Merchant m = new Merchant(
@@ -76,7 +76,7 @@ class MarketModeratorMerchantTest {
         MarketModerator mm = new MarketModerator(
                 "Mod123", "mod@example.com", "+123456789",
                 "modLogin", "password123",
-                "St", "C", "S", "EMP123"
+                "St", "C", "S", "EMP123",null
         );
 
         User u = new Merchant(
@@ -92,7 +92,7 @@ class MarketModeratorMerchantTest {
         MarketModerator mm1 = new MarketModerator(
                 "Mod1", "mod1@example.com", "+123456789",
                 "modLogi1n", "password123",
-                "St", "C", "S", "EMP123");
+                "St", "C", "S", "EMP123",null);
         Merchant m1 = new Merchant(
                 "Joh1n", "rm1@test.com", "+114431534531",
                 "log1in", "password1888",
@@ -108,7 +108,7 @@ class MarketModeratorMerchantTest {
         MarketModerator mm12 = new MarketModerator(
                 "Mod12", "mod12@example.com", "+1223456789",
                 "mod2Logi1n", "passwo2rd123",
-                "St2", "C2", "S2", "EMP123");
+                "St2", "C2", "S2", "EMP123",null);
         Merchant m12 = new Merchant(
                 "Joh12n", "rm1@te2st.com", "+1144321534531",
                 "lo2g1in", "passw2ord1888",
