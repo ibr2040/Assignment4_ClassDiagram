@@ -1,22 +1,16 @@
+import java.io.Serializable;
 import java.util.HashSet;
 
-public class Advertiser extends User{
+public class Advertiser implements Serializable {
     private HashSet<Campaign> campaigns = new HashSet <> ();
-    public Advertiser(     String fullName,
-                           String email,
-                           String mobileNumber,
-                           String login,
-                           String password,
-                           String street,
-                           String city,
-                           String state,
+    private User user;
+    public Advertiser(User user,
                            Campaign campaign
     ){
-
-        super(fullName, email, mobileNumber, login, password,street,city,state);
         if (campaign == null) {
             throw new IllegalArgumentException("Advertiser must have at least one initial campaign");
         }
+        this.user=user;
         campaigns.add(campaign);
     }
     public void addCampaign(Campaign campaign){

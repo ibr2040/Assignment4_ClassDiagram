@@ -1,14 +1,8 @@
-public class Shopper extends User{
-    public Shopper(     String fullName,
-                           String email,
-                           String mobileNumber,
-                           String login,
-                           String password,
-                           String street,
-                           String city,
-                           String state
+public class Shopper{
+    private User user;
+    public Shopper( User user
     ){
-        super(fullName, email, mobileNumber, login, password,street,city,state);
+        this.user=user;
     }
     public void changeProductQuantity(int quantity){
         System.out.println("Changing product quantity to " + quantity);
