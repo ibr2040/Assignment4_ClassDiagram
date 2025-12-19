@@ -21,6 +21,7 @@ public class Merchant extends User {
     ) {
         super(fullName, email, mobileNumber, login, password, street, city, state);
 
+
         if (bankAccountNumber == null || bankAccountNumber.isBlank()) {
             throw new IllegalArgumentException("Bank account number cannot be empty");
         }
