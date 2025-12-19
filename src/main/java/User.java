@@ -63,6 +63,7 @@ public class User implements Serializable{
         this.shippingAddress = new ShippingAddress(street, city, state);
 
         extent.add(this);
+
     }
 
     public boolean updateProfile(
