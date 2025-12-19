@@ -1,6 +1,7 @@
+import java.io.Serializable;
 import java.util.HashSet;
 
-public class Advertiser{
+public class Advertiser implements Serializable {
     private HashSet<Campaign> campaigns = new HashSet <> ();
     private User user;
     public Advertiser(User user,

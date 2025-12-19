@@ -17,7 +17,7 @@ public class ExtentedTest {
         DurationDate.loadExtent();
 
 
-        assertEquals(1, DurationDate.getExtent().size());
+        assertEquals(2, DurationDate.getExtent().size());
     }
 
     @Test

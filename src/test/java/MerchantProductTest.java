@@ -6,13 +6,15 @@ class MerchantProductTest {
 
     @Test
     void testCreateProductCreatesReverseConnection() {
-        Merchant m = new Merchant(
-                "12345","asdfasdf@gmail.com","+34562345",
-                "asdfsadfas","sasdsssddfasdf","PL437585256",
-                "asdfasdf","sdaffasdf","sadf"
+        User m12 = new User(
+                "John", "rm@test.com", "+11443534531",
+                "login", "password888",
+                "PL61109010140000071219812874",
+                "Street", "City"
         );
+        m12.setMerchant("PL61109010140000071219812874");
 
-        Product p = m.createProduct(
+        Product p = m12.getMerchant().createProduct(
                 "/images/asdf.png",
                 12,
                 "sdfa",
@@ -20,45 +22,75 @@ class MerchantProductTest {
                 true
         );
 
-        assertEquals(m, p.getMerchant());
-        assertTrue(m.getProducts().contains(p));
+        assertEquals(m12.getMerchant(), p.getMerchant());
+        assertTrue(m12.getMerchant().getProducts().contains(p));
     }
 
     @Test
     void testMultipleProductsCanBeCreated() {
-        Merchant m = new Merchant("12345","asdfasdf@gmail.com","+34562345","asdfsadfas","sasdsssddfasdf","PL437585256","asdfasdf","sdaffasdf","sadf");
+        User m = new User(
+                "John", "rm@test.com", "+11443534531",
+                "login", "password888",
+                "PL61109010140000071219812874",
+                "Street", "City"
+        );
+        m.setMerchant("PL61109010140000071219812874");
 
-        Product p1 = m.createProduct("/images/Lapto3p.png", 1200,"T33","Electronics",true);
-        Product p2 = m.createProduct("/images/Laptop1.png", 1300,"T122","Electronics",true);
+        Product p1 = m.getMerchant().createProduct("/images/Lapto3p.png", 1200,"T33","Electronics",true);
+        Product p2 = m.getMerchant().createProduct("/images/Laptop1.png", 1300,"T122","Electronics",true);
 
-        assertEquals(2, m.getProducts().size());
-        assertEquals(m, p1.getMerchant());
-        assertEquals(m, p2.getMerchant());
+        assertEquals(2, m.getMerchant().getProducts().size());
+        assertEquals(m.getMerchant(), p1.getMerchant());
+        assertEquals(m.getMerchant(), p2.getMerchant());
     }
 
     @Test
     void testCannotRemoveCompositionProductIndividually() {
-        Merchant m = new Merchant("12345","asdfasdf@gmail.com","+34562345","asdfsadfas","sadfdadsadsaasdf","PL337585256","asdfasdf","sdaffasdf","sadf");
-        Product p = m.createProduct("/images/Laptop.png", 1200,"T332","Electronics",true);
+        User m = new User(
+                "John", "rm@test.com", "+11443534531",
+                "login", "password888",
+                "PL61109010140000071219812874",
+                "Street", "City"
+        );
+        m.setMerchant("PL61109010140000071219812874");
+        Product p = m.getMerchant().createProduct("/images/Laptop.png", 1200,"T332","Electronics",true);
 
-        assertThrows(UnsupportedOperationException.class, () -> m.removeProduct(p));
+        assertThrows(UnsupportedOperationException.class, () -> m.getMerchant().removeProduct(p));
     }
 
     @Test
     void testCannotRemoveNullProduct() {
-        Merchant m = new Merchant("12345","asdfasdf@gmail.com","+34562345","asdfsadfas","sadfadsdsdf","PL327585256","asdfasdf","sdaffasdf","sadf");
+        User m = new User(
+                "John", "rm@test.com", "+11443534531",
+                "login", "password888",
+                "PL61109010140000071219812874",
+                "Street", "City"
+        );
+        m.setMerchant("PL61109010140000071219812874");
 
-        assertThrows(IllegalArgumentException.class, () -> m.removeProduct(null));
+        assertThrows(IllegalArgumentException.class, () -> m.getMerchant().removeProduct(null));
     }
 
     @Test
     void testCannotRemoveProductNotBelongingToMerchant() {
-        Merchant m1 = new Merchant("12345","asdfasdf@gmail.com","+34562345","asdfsadfas","sadfaDSDSDsdf","PL7585256","asdfasdf","sdaffasdf","sadf");
-        Merchant m2 = new Merchant("12345","asdfasdf@gmail.com","+34562345","asdfsadfas","sadfDSSDSasdf","PL7585256","asdfasdf","sdaffasdf","sadf");
+        User m1 = new User(
+                "John", "rm@test.com", "+11443534531",
+                "login", "password888",
+                "PL61109010140000071219812874",
+                "Street", "City"
+        );
+        m1.setMerchant("PL61109010140000071219812874");
+        User m2 = new User(
+                "Joh123n", "rm@te12st.com", "+11443534512331",
+                "login", "passwor123d888",
+                "PL6140000071219812874",
+                "S123treet", "City"
+        );
+        m2.setMerchant("PL611090101400000774");
 
-        Product p = m2.createProduct("/images/Laptop.png", 1200,"T22","Electronics",true);
+        Product p = m2.getMerchant().createProduct("/images/Laptop.png", 1200,"T22","Electronics",true);
 
-        assertThrows(IllegalArgumentException.class, () -> m1.removeProduct(p));
+        assertThrows(IllegalArgumentException.class, () -> m1.getMerchant().removeProduct(p));
     }
 
     @Test
@@ -69,21 +101,43 @@ class MerchantProductTest {
 
     @Test
     void testMerchantBankAccountCannotBeEmpty() {
-        assertThrows(IllegalArgumentException.class, () -> new Merchant("12345","asdfasdf@gmail.com","+34562345","asdfsadfas","sadfasdf","","asdfasdf","sdaffasdf","sadf"));
-        assertThrows(IllegalArgumentException.class, () -> new Merchant("12345","asdfasdf@gmail.com","+34562345","asdfsadfas","sadfasdf",null,"asdfasdf","sdaffasdf","sadf"));
+        assertThrows(IllegalArgumentException.class, () ->{
+            User m = new User(
+                    "John", "rm@test.com", "+11443534531",
+                    "login", "password888",
+                    "PL61109010140000071219812874",
+                    "Street", "City"
+            );
+            m.setMerchant(null);
+        });
+        assertThrows(IllegalArgumentException.class, () -> {
+            User m = new User(
+                    "John", "rm@test.com", "+11443534531",
+                    "login", "password888",
+                    "PL61109010140000071219812874",
+                    "Street", "City"
+            );
+            m.setMerchant("");
+        });
     }
 
 
     @Test
     void testDeletingMerchantDeletesAllProducts() {
-        Merchant m = new Merchant("12345","asdfasdf@gmail.com","+34562345","asdfsadfas","sadfaddsdsasdsdf","PL327585256","asdfasdf","sdaffasdf","sadf");
-        Product p1 = m.createProduct("/images/Laptop.png", 1200,"T33","Electronics",true);
-        Product p2 = m.createProduct("/images/Laptop.png", 1200,"33T","Electronics",true);
+        User m = new User(
+                "John", "rm@test.com", "+11443534531",
+                "login", "password888",
+                "PL61109010140000071219812874",
+                "Street", "City"
+        );
+        m.setMerchant("PL61109010140000071219812874");
+        Product p1 = m.getMerchant().createProduct("/images/Laptop.png", 1200,"T33","Electronics",true);
+        Product p2 = m.getMerchant().createProduct("/images/Laptop.png", 1200,"33T","Electronics",true);
 
-        m.deleteMerchant();
+        m.getMerchant().deleteMerchant();
 
         assertNull(p1.getMerchant());
         assertNull(p2.getMerchant());
-        assertTrue(m.getProducts().isEmpty());
+        assertTrue(m.getMerchant().getProducts().isEmpty());
     }
 }

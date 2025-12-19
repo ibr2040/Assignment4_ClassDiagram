@@ -173,4 +173,19 @@ public class User implements Serializable{
     public String getPassword() {
         return password;
     }
+
+    public Advertiser getAdvertiser() {
+        return advertiser;
+    }
+
+    public Shopper getShopper() {
+        return shopper;
+    }
+
+    public Merchant getMerchant() {
+        return merchant;
+    }
+    public void setEmail(String email) {
+        this.email = email;
+    }
 }

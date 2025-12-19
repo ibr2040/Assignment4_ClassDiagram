@@ -222,7 +222,7 @@ class UserTest {
         User.getExtent().clear();
         assertEquals(0, User.getExtent().size());
 
-        Advertiser a = new Advertiser(
+        User a = new User(
                 "John Doe",
                 "john@example.com",
                 "+123456789",
@@ -230,11 +230,11 @@ class UserTest {
                 "pass123555555",
                 "Main St",
                 "NY",
-                "NY",
-                new Campaign("g",1,List.of(new Product("/images/asdf.png",20, "TV3", "Electronics","asdf",true)))
+                "NY"
         );
+        a.setAdvertiser(new Campaign("g",1,List.of(new Product("/images/asdf.png",20, "TV3", "Electronics","asdf",true))));
 
-        Merchant m = new Merchant(
+        User m = new User(
                 "Alice Smith",
                 "alice@example.com",
                 "+987654321",
@@ -242,9 +242,9 @@ class UserTest {
                 "pass5555555",
                 "PL0140000071219812874",
                 "Market St",
-                "LA",
-                "CA"
+                "LA"
         );
+        m.setMerchant("PL0140000071219812874");
 
         assertEquals(2, User.getExtent().size());
 
@@ -258,8 +258,8 @@ class UserTest {
         List<User> list = User.getExtent();
         assertEquals(2, list.size());
 
-        assertInstanceOf(Advertiser.class, list.get(0));
-        assertInstanceOf(Merchant.class, list.get(1));
+        assertInstanceOf(User.class, list.get(0));
+        assertInstanceOf(User.class, list.get(1));
 
         assertNotSame(a, list.get(0));
         assertNotSame(m, list.get(1));
@@ -268,34 +268,42 @@ class UserTest {
     @Test
     public void testMerchantBankAccountExceptions() {
 
-        assertThrows(IllegalArgumentException.class, () ->
-                new Merchant("Alice", "a@a.com", "+123456789", "login", "password123",
-                        "", "Street", "City", "State")
+        assertThrows(IllegalArgumentException.class, () -> {
+                    User u = new User("Alice", "a@a.com", "+123456789", "login", "password123",
+                            "", "Street", "City");
+                    u.setMerchant("");
+                }
         );
 
 
-        assertThrows(IllegalArgumentException.class, () ->
-                new Merchant("Alice", "a@a.com", "+123456789", "login", "password123",
-                        "12345", "Street", "City", "State")
+        assertThrows(IllegalArgumentException.class, () -> {
+                    User u1 = new User("Alice", "a@a.com", "+123456789", "login", "password123",
+                            "12345", "Street", "City");
+                    u1.setMerchant("12345");
+                }
         );
 
-        assertThrows(IllegalArgumentException.class, () ->
-                new Merchant("Alice", "a@a.com", "+123456789", "login", "password123",
-                        "12AB345678", "Street", "City", "State")
+        assertThrows(IllegalArgumentException.class, () -> {
+                    User u2 = new User("Alice", "a@a.com", "+123456789", "login", "password123",
+                            "12AB345678", "Street", "City");
+                    u2.setMerchant("12AB345678");
+                }
         );
     }
 
     @Test
     public void testValidMerchantCreation() {
-        Merchant m = new Merchant("Alice", "alice@mail.com", "+12345443436789", "login", "password1242343",
-                "PL3431234567890", "Street", "City", "State");
-        assertNotNull(m);
+        User m = new User("Alice", "alice@mail.com", "+12345443436789", "login", "password1242343",
+                "PL3431234567890", "Street", "City");
+        m.setMerchant("PL3431234567890");
+        assertNotNull(m.getMerchant());
     }
 
     @Test
     public void testValidAdvertiserCreation() {
-        Advertiser a = new Advertiser("Bob", "bob@mail.com", "+987654321", "login", "password123",
-                "Street", "City", "State",new Campaign("g3443",1,List.of(new Product("/images/asdf.png",20, "TV3", "Electronics","asdf",true))));
+        User a = new User("Bob", "bob@mail.com", "+987654321", "login", "password123",
+                "Street", "City", "State");
+        a.setAdvertiser(new Campaign("g3443",1,List.of(new Product("/images/asdf.png",20, "TV3", "Electronics","asdf",true))));
         assertNotNull(a);
     }
 }

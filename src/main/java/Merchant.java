@@ -1,9 +1,8 @@
+import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 
-public class Merchant {
+public class Merchant implements Serializable {
     private List<Product> products=new ArrayList<>();
     private String bankAccountNumber;;
     private MarketModerator suprevisor;
@@ -83,9 +82,12 @@ public class Merchant {
             throw new IllegalArgumentException("Invalid email format");
         }
         if (!(suprevisor == null)) {
-            suprevisor.updateEmail(this, this.email, email);
+            suprevisor.updateEmail(this, user.getEmail(), email);
         }
-        this.email = email;
+        user.setEmail(email);
+    }
+    public String getEmail(){
+        return user.getEmail();
     }
     public void addSupervisor(MarketModerator suprevisor) {
         this.suprevisor=suprevisor;
