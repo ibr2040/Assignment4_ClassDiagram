@@ -2,7 +2,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-abstract class User implements Serializable{
+public class User implements Serializable{
 
     private static final List<User> extent=new ArrayList<>();
     private static final String EXTENT_FILE = "user_extent.ser";
@@ -15,6 +15,10 @@ abstract class User implements Serializable{
     private String password;
 
     private static final int MAX_NAME_LENGTH=50;
+
+    private Advertiser advertiser;
+    private Shopper shopper;
+    private Merchant merchant;
 
     public User(
             String fullName,
@@ -131,6 +135,18 @@ abstract class User implements Serializable{
         public String toString() {
             return street + " " + city + " " + state;
         }
+    }
+
+    public void setMerchant(String bankAccount){
+        this.merchant=new Merchant(this,bankAccount);
+    }
+
+    public void setAdvertiser(Campaign campaign){
+        this.advertiser=new Advertiser(this,campaign);
+    }
+
+    public void setShopper(){
+        this.shopper=new Shopper(this);
     }
 
     public String getFullName() {
